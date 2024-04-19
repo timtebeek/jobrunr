@@ -9,7 +9,7 @@ import static org.jobrunr.jobs.JobTestBuilder.aScheduledJob;
 class JobListVersionerTest {
 
     @Test
-    void testJobListVersionerOnCommitVersionIsIncreased() {
+    void jobListVersionerOnCommitVersionIsIncreased() {
         // GIVEN
         Job job1 = aScheduledJob().withVersion(5).build();
         Job job2 = aScheduledJob().withVersion(5).build();
@@ -24,7 +24,7 @@ class JobListVersionerTest {
     }
 
     @Test
-    void testJobListVersionerOnRollbackOfSomeJobsVersionIsDecreasedForThoseJobs() {
+    void jobListVersionerOnRollbackOfSomeJobsVersionIsDecreasedForThoseJobs() {
         // GIVEN
         Job job1 = aScheduledJob().withVersion(5).build();
         Job job2 = aScheduledJob().withVersion(5).build();
@@ -40,7 +40,7 @@ class JobListVersionerTest {
     }
 
     @Test
-    void testJobListVersionerInTryWithResourcesOnRollbackOfSomeJobsVersionIsDecreasedForThoseJobs() {
+    void jobListVersionerInTryWithResourcesOnRollbackOfSomeJobsVersionIsDecreasedForThoseJobs() {
         // GIVEN
         Job job1 = aScheduledJob().withVersion(5).build();
         Job job2 = aScheduledJob().withVersion(5).build();

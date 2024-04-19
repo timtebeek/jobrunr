@@ -7,7 +7,7 @@ import org.junit.jupiter.api.AfterAll;
 
 import java.sql.SQLException;
 
-public class TomcatJdbcPoolH2StorageProviderTest extends SqlStorageProviderTest {
+class TomcatJdbcPoolH2StorageProviderTest extends SqlStorageProviderTest {
 
     private static DataSource dataSource;
 
@@ -29,7 +29,7 @@ public class TomcatJdbcPoolH2StorageProviderTest extends SqlStorageProviderTest 
     }
 
     @AfterAll
-    public static void destroyDatasource() throws SQLException {
+    static void destroyDatasource() throws SQLException {
         dataSource.close();
         dataSource = null;
     }

@@ -22,7 +22,7 @@ import static org.jobrunr.storage.sql.SqlTestUtils.toHikariDataSource;
 import static org.jobrunr.utils.resilience.RateLimiter.Builder.rateLimit;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class PostgresTablePrefixStorageProviderTest extends AbstractPostgresStorageProviderTest {
+class PostgresTablePrefixStorageProviderTest extends AbstractPostgresStorageProviderTest {
 
     private static HikariDataSource dataSource;
 
@@ -35,7 +35,7 @@ public class PostgresTablePrefixStorageProviderTest extends AbstractPostgresStor
     }
 
     @AfterAll
-    public static void destroyDatasource() {
+    static void destroyDatasource() {
         dataSource.close();
         dataSource = null;
     }

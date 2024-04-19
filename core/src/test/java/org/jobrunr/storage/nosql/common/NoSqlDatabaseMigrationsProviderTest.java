@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class NoSqlDatabaseMigrationsProviderTest {
 
     @Test
-    void testNoSqlDatabaseMigrations() {
+    void noSqlDatabaseMigrations() {
         final NoSqlDatabaseMigrationsProvider databaseCreator = new NoSqlDatabaseMigrationsProvider(singletonList(MongoDBStorageProvider.class));
         final Stream<NoSqlMigration> databaseSpecificMigrations = databaseCreator.getMigrations();
 
@@ -24,7 +24,7 @@ class NoSqlDatabaseMigrationsProviderTest {
     }
 
     @Test
-    void testNoSqlDatabaseMigrationsAreSortedCorrectly() {
+    void noSqlDatabaseMigrationsAreSortedCorrectly() {
         final NoSqlDatabaseMigrationsProvider databaseCreator = new NoSqlDatabaseMigrationsProvider(asList(MongoDBStorageProvider.class, AmazonDocumentDBStorageProvider.class));
         final Stream<NoSqlMigration> databaseSpecificMigrations = databaseCreator.getMigrations();
 
@@ -33,7 +33,7 @@ class NoSqlDatabaseMigrationsProviderTest {
     }
 
     @Test
-    void testNoSqlDatabaseMigrationsWhereMigrationsCanBeOverridden() {
+    void noSqlDatabaseMigrationsWhereMigrationsCanBeOverridden() {
         final NoSqlDatabaseMigrationsProvider databaseCreator = new NoSqlDatabaseMigrationsProvider(asList(MongoDBStorageProvider.class, AmazonDocumentDBStorageProvider.class));
         final Stream<NoSqlMigration> databaseSpecificMigrations = databaseCreator.getMigrations();
 

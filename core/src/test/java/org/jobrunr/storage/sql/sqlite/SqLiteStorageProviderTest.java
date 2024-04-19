@@ -24,7 +24,7 @@ class SqLiteStorageProviderTest extends SqlStorageProviderTest {
     }
 
     @AfterAll
-    public static void destroyDatasource() {
+    static void destroyDatasource() {
         dataSource = null;
     }
 }

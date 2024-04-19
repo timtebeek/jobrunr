@@ -10,7 +10,7 @@ import static org.jobrunr.jobs.states.StateName.*;
 class AllowedJobStateStateChangesTest {
 
     @Test
-    void testAllowedStatesFromScheduled() {
+    void allowedStatesFromScheduled() {
         assertThat(isAllowedStateChange(SCHEDULED, SCHEDULED)).isTrue();
         assertThat(isAllowedStateChange(SCHEDULED, ENQUEUED)).isTrue();
         assertThat(isAllowedStateChange(SCHEDULED, FAILED)).isTrue();
@@ -21,7 +21,7 @@ class AllowedJobStateStateChangesTest {
     }
 
     @Test
-    void testAllowedStatesFromEnqueued() {
+    void allowedStatesFromEnqueued() {
         assertThat(isAllowedStateChange(ENQUEUED, SCHEDULED)).isTrue();
         assertThat(isAllowedStateChange(ENQUEUED, PROCESSING)).isTrue();
         assertThat(isAllowedStateChange(ENQUEUED, SUCCEEDED)).isTrue();
@@ -32,7 +32,7 @@ class AllowedJobStateStateChangesTest {
     }
 
     @Test
-    void testAllowedStatesFromProcessing() {
+    void allowedStatesFromProcessing() {
         assertThat(isAllowedStateChange(PROCESSING, SUCCEEDED)).isTrue();
         assertThat(isAllowedStateChange(PROCESSING, FAILED)).isTrue();
         assertThat(isAllowedStateChange(PROCESSING, DELETED)).isTrue();
@@ -43,7 +43,7 @@ class AllowedJobStateStateChangesTest {
     }
 
     @Test
-    void testAllowedStatesFromSucceeded() {
+    void allowedStatesFromSucceeded() {
         assertThat(isAllowedStateChange(SUCCEEDED, SCHEDULED)).isTrue();
         assertThat(isAllowedStateChange(SUCCEEDED, ENQUEUED)).isTrue();
         assertThat(isAllowedStateChange(SUCCEEDED, DELETED)).isTrue();
@@ -54,7 +54,7 @@ class AllowedJobStateStateChangesTest {
     }
 
     @Test
-    void testAllowedStatesFromFailed() {
+    void allowedStatesFromFailed() {
         assertThat(isAllowedStateChange(FAILED, SCHEDULED)).isTrue();
         assertThat(isAllowedStateChange(FAILED, ENQUEUED)).isTrue();
         assertThat(isAllowedStateChange(FAILED, DELETED)).isTrue();
@@ -65,7 +65,7 @@ class AllowedJobStateStateChangesTest {
     }
 
     @Test
-    void testAllowedStatesFromDeleted() {
+    void allowedStatesFromDeleted() {
         assertThat(isAllowedStateChange(DELETED, SCHEDULED)).isTrue();
         assertThat(isAllowedStateChange(DELETED, ENQUEUED)).isTrue();
 

@@ -48,7 +48,7 @@ import java.time.Duration;
 
 import static org.jobrunr.JobRunrAssertions.assertThat;
 
-public class JobRunrAutoConfigurationTest {
+class JobRunrAutoConfigurationTest {
 
     private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
             .withConfiguration(AutoConfigurations.of(

@@ -20,7 +20,7 @@ class SQLServerStorageProviderTest extends AbstractSQLServerStorageProviderTest 
     }
 
     @AfterAll
-    public static void destroyDatasource() {
+    static void destroyDatasource() {
         dataSource.close();
         dataSource = null;
     }

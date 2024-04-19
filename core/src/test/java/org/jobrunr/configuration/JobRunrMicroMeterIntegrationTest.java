@@ -15,7 +15,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class JobRunrMicroMeterIntegrationTest {
@@ -28,7 +31,7 @@ class JobRunrMicroMeterIntegrationTest {
     private BackgroundJobServer backgroundJobServer;
 
     @Test
-    void testWithStorageProviderOnly() {
+    void withStorageProviderOnly() {
         // GIVEN
         JobRunrMicroMeterIntegration jobRunrMicroMeterIntegration = new JobRunrMicroMeterIntegration(meterRegistry);
         when(storageProvider.getJobStats()).thenReturn(JobStats.empty());
@@ -46,7 +49,7 @@ class JobRunrMicroMeterIntegrationTest {
     }
 
     @Test
-    void testWithStorageProviderAndBackgroundJobServerOnly() {
+    void withStorageProviderAndBackgroundJobServerOnly() {
         // GIVEN
         JobRunrMicroMeterIntegration jobRunrMicroMeterIntegration = new JobRunrMicroMeterIntegration(meterRegistry);
         when(meterRegistry.more()).thenReturn(mock(MeterRegistry.More.class));

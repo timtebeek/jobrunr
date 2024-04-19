@@ -7,14 +7,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AmountRequestTest {
 
     @Test
-    void testAmountRequestWithEmptyString() {
+    void amountRequestWithEmptyString() {
         AmountRequest amountRequest = AmountRequest.fromString("");
 
         assertThat(amountRequest).isNull();
     }
 
     @Test
-    void testOffsetBasedPageRequestWithEmptyString() {
+    void offsetBasedPageRequestWithEmptyString() {
         OffsetBasedPageRequest offsetBasedPageRequest = OffsetBasedPageRequest.fromString("");
 
         assertThat(offsetBasedPageRequest).isNull();

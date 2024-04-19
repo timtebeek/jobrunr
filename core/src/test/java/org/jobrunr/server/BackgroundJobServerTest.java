@@ -135,7 +135,7 @@ class BackgroundJobServerTest {
     }
 
     @Test
-    void testStartAndStop() {
+    void startAndStop() {
         // GIVEN server stopped and we enqueue a job
         JobId jobId = BackgroundJob.enqueue(() -> testService.doWork());
 
@@ -177,7 +177,7 @@ class BackgroundJobServerTest {
     }
 
     @Test
-    void testOnServerExitCleansUpAllThreads() {
+    void onServerExitCleansUpAllThreads() {
         final int amountOfJobs = 10;
 
         backgroundJobServer.start();
@@ -194,7 +194,7 @@ class BackgroundJobServerTest {
     }
 
     @Test
-    void testServerStatusStateMachine() {
+    void serverStatusStateMachine() {
         // INITIAL
         assertThat(backgroundJobServer.isAnnounced()).isFalse();
         assertThat(backgroundJobServer.isUnAnnounced()).isTrue();
@@ -276,7 +276,7 @@ class BackgroundJobServerTest {
     }
 
     @Test
-    void testStopBackgroundJobServerWhileProcessing() {
+    void stopBackgroundJobServerWhileProcessing() {
         backgroundJobServer.start();
 
         final JobId jobId = BackgroundJob.enqueue(() -> testService.doWorkThatTakesLong(12));
@@ -288,7 +288,7 @@ class BackgroundJobServerTest {
     }
 
     @Test
-    void testBackgroundJobServerWasKilledWhileProcessing() {
+    void backgroundJobServerWasKilledWhileProcessing() {
         backgroundJobServer.start();
 
         final Job jobThatWasProcessedButBackgroundJobServerWasKilled = storageProvider.save(anEnqueuedJob().withState(new ProcessingState(backgroundJobServer), now().minus(2, ChronoUnit.MINUTES)).build());
@@ -297,7 +297,7 @@ class BackgroundJobServerTest {
     }
 
     @Test
-    void testHeartbeatsAreSentForJobsInProcessingState() {
+    void heartbeatsAreSentForJobsInProcessingState() {
         backgroundJobServer.start();
 
         final JobId jobId = BackgroundJob.enqueue(() -> testService.doWorkThatTakesLong(4));
@@ -307,7 +307,7 @@ class BackgroundJobServerTest {
     }
 
     @Test
-    void testCanNotStartBackgroundJobServerTwice() {
+    void canNotStartBackgroundJobServerTwice() {
         new Thread(() -> backgroundJobServer.start()).start();
         new Thread(() -> backgroundJobServer.start()).start();
 

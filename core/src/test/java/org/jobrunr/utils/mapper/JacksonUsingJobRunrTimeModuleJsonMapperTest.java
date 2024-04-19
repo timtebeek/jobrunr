@@ -35,7 +35,7 @@ public class JacksonUsingJobRunrTimeModuleJsonMapperTest extends AbstractJsonMap
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/779")
     @Deprecated
-    void testCreatorHasDefaultVisibilityInJacksonObjectMapper() {
+    void creatorHasDefaultVisibilityInJacksonObjectMapper() {
         Object objectMapper = Whitebox.getInternalState(jsonMapper, "objectMapper");
         Object configOverrides = Whitebox.getInternalState(objectMapper, "_configOverrides");
         Object visibilityChecker = Whitebox.getInternalState(configOverrides, "_visibilityChecker");
@@ -44,7 +44,7 @@ public class JacksonUsingJobRunrTimeModuleJsonMapperTest extends AbstractJsonMap
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/451")
-    void testCanDeserializeWithJsonCreator() {
+    void canDeserializeWithJsonCreator() {
         SomeParameter someParameter = new SomeParameter(3);
         Job job = anEnqueuedJob()
                 .withJobDetails(() -> doWorkWithParameter(someParameter))

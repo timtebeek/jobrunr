@@ -27,7 +27,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testDisplayNameByAnnotationReplacesVariables() {
+    void displayNameByAnnotationReplacesVariables() {
         Job job = anEnqueuedJob().withoutName()
                 .withJobDetails(() -> testService.doWorkWithAnnotationAndJobContext(67656, "the almighty user", JobContext.Null))
                 .build();
@@ -38,7 +38,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testDisplayNameIsUsedIfProvidedByJobBuilder() {
+    void displayNameIsUsedIfProvidedByJobBuilder() {
         Job job = anEnqueuedJob()
                 .withName("My job name")
                 .withJobDetails(jobDetails()
@@ -53,7 +53,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testAmountOfRetriesIsUsedIfProvidedByJobBuilder() {
+    void amountOfRetriesIsUsedIfProvidedByJobBuilder() {
         Job job = anEnqueuedJob()
                 .withAmountOfRetries(3)
                 .withJobDetails(jobDetails()
@@ -68,7 +68,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testLabelsIsUsedIfProvidedByJobBuilder() {
+    void labelsIsUsedIfProvidedByJobBuilder() {
         Job job = anEnqueuedJob()
                 .withLabels("TestLabel", "Email")
                 .withJobDetails(jobDetails()
@@ -83,7 +83,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testLabelsIsUsedIfProvidedByAnnotation() {
+    void labelsIsUsedIfProvidedByAnnotation() {
         Job job = anEnqueuedJob()
                 .withJobDetails(() -> testService.doWorkWithJobAnnotationAndLabels(3, "customer name"))
                 .build();
@@ -94,7 +94,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testDisplayNameWithAnnotationUsingJobParametersAndMDCVariables() {
+    void displayNameWithAnnotationUsingJobParametersAndMDCVariables() {
         MDC.put("customer.id", "1");
         Job job = anEnqueuedJob()
                 .withoutName()
@@ -111,7 +111,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testDisplayNameWithAnnotationUsingJobParametersAndMDCVariablesThatDoNotExist() {
+    void displayNameWithAnnotationUsingJobParametersAndMDCVariablesThatDoNotExist() {
         MDC.put("key-not-used-in-annotation", "1");
         Job job = anEnqueuedJob()
                 .withoutName()
@@ -128,7 +128,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testDisplayNameFromJobDetailsNormalMethod() {
+    void displayNameFromJobDetailsNormalMethod() {
         Job job = anEnqueuedJob()
                 .withoutName()
                 .withJobDetails(jobDetails()
@@ -143,7 +143,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testDisplayNameFromJobDetailsStaticMethod() {
+    void displayNameFromJobDetailsStaticMethod() {
         Job job = anEnqueuedJob()
                 .withoutName()
                 .withJobDetails(systemOutPrintLnJobDetails("some message"))
@@ -155,7 +155,7 @@ class DefaultJobFilterTest {
     }
 
     @Test
-    void testDisplayNameFilterAlsoWorksWithJobContext() {
+    void displayNameFilterAlsoWorksWithJobContext() {
         Job job = anEnqueuedJob()
                 .withoutName()
                 .withJobDetails(jobDetails()

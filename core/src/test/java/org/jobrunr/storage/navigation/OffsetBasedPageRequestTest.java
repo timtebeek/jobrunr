@@ -12,14 +12,14 @@ import static org.jobrunr.jobs.JobTestBuilder.anEnqueuedJob;
 class OffsetBasedPageRequestTest {
 
     @Test
-    void testOffsetBasedPageRequestWithEmptyString() {
+    void offsetBasedPageRequestWithEmptyString() {
         OffsetBasedPageRequest offsetBasedPageRequest = OffsetBasedPageRequest.fromString("");
 
         assertThat(offsetBasedPageRequest).isNull();
     }
 
     @Test
-    void testOffsetBasedPageRequestWithoutLimitAndOffsetFromAndToString() {
+    void offsetBasedPageRequestWithoutLimitAndOffsetFromAndToString() {
         OffsetBasedPageRequest offsetBasedPageRequest = OffsetBasedPageRequest.fromString("order=jobName:ASC&");
 
         assertThat(offsetBasedPageRequest)
@@ -31,7 +31,7 @@ class OffsetBasedPageRequestTest {
     }
 
     @Test
-    void testOffsetBasedPageRequestWithoutOffsetFromAndToString() {
+    void offsetBasedPageRequestWithoutOffsetFromAndToString() {
         OffsetBasedPageRequest offsetBasedPageRequest = OffsetBasedPageRequest.fromString("order=jobName:ASC&limit=10");
 
         assertThat(offsetBasedPageRequest)
@@ -43,7 +43,7 @@ class OffsetBasedPageRequestTest {
     }
 
     @Test
-    void testOffsetBasedPageRequestWithEmptyOffsetFromAndToString() {
+    void offsetBasedPageRequestWithEmptyOffsetFromAndToString() {
         OffsetBasedPageRequest offsetBasedPageRequest = OffsetBasedPageRequest.fromString("order=jobName:ASC&limit=10&offset=");
 
         assertThat(offsetBasedPageRequest)
@@ -55,7 +55,7 @@ class OffsetBasedPageRequestTest {
     }
 
     @Test
-    void testOffsetBasedPageRequestWithOffsetFromAndToString() {
+    void offsetBasedPageRequestWithOffsetFromAndToString() {
         OffsetBasedPageRequest offsetBasedPageRequest = OffsetBasedPageRequest.fromString("order=jobName:ASC&limit=10&offset=20");
 
         assertThat(offsetBasedPageRequest)
@@ -67,7 +67,7 @@ class OffsetBasedPageRequestTest {
     }
 
     @Test
-    void testOffsetBasedPageRequestNextPageWorks() {
+    void offsetBasedPageRequestNextPageWorks() {
         OffsetBasedPageRequest offsetBasedPageRequest = Paging.OffsetBasedPage.ascOnUpdatedAt(2);
 
         Page<Job> jobPage1 = offsetBasedPageRequest.mapToNewPage(50, asList(

@@ -26,7 +26,7 @@ class ProcessScheduledJobsTaskTest extends AbstractTaskTest {
     }
 
     @Test
-    void testTask() {
+    void task() {
         final Job scheduledJob = aScheduledJob().build();
 
         when(storageProvider.getScheduledJobs(any(), any(AmountRequest.class))).thenReturn(singletonList(scheduledJob), emptyJobList());

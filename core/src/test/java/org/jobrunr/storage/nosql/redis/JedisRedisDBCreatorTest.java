@@ -30,18 +30,18 @@ class JedisRedisDBCreatorTest {
     private JedisRedisDBCreator jedisRedisDBCreator;
 
     @BeforeEach
-    public void setupDBCreator() {
+    void setupDBCreator() {
         jedisConnectionPool = getJedisPool();
         jedisRedisDBCreator = new JedisRedisDBCreator(jedisRedisStorageProviderMock, jedisConnectionPool, "");
     }
 
     @AfterEach
-    public void teardownPool() {
+    void teardownPool() {
         jedisConnectionPool.close();
     }
 
     @Test
-    void testMigrationsHappyPath() {
+    void migrationsHappyPath() {
         assertThat(jedisRedisDBCreator.isNewMigration(new NoSqlMigrationByClass(M001_JedisRemoveJobStatsAndUseMetadata.class))).isTrue();
 
         assertThatCode(jedisRedisDBCreator::runMigrations).doesNotThrowAnyException();

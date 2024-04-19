@@ -19,10 +19,10 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.jobrunr.utils.mapper.JsonMapperValidator.validateJsonMapper;
 
-public class JsonMapperValidatorTest {
+class JsonMapperValidatorTest {
 
     @Test
-    void testInvalidJacksonJsonMapperNoJavaTimeModule() {
+    void invalidJacksonJsonMapperNoJavaTimeModule() {
         assertThatThrownBy(() -> validateJsonMapper(new InvalidJacksonJsonMapper(new ObjectMapper().registerModule(new Jdk8Module()))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("The JsonMapper you provided cannot be used as it deserializes jobs in an incorrect way.");
@@ -30,7 +30,7 @@ public class JsonMapperValidatorTest {
     }
 
     @Test
-    void testInvalidJacksonJsonMapperNoISO8601TimeFormat() {
+    void invalidJacksonJsonMapperNoISO8601TimeFormat() {
         assertThatThrownBy(() -> validateJsonMapper(new InvalidJacksonJsonMapper(new ObjectMapper().registerModule(new Jdk8Module()).registerModule(new JavaTimeModule()))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("The JsonMapper you provided cannot be used as it deserializes jobs in an incorrect way.")
@@ -38,7 +38,7 @@ public class JsonMapperValidatorTest {
     }
 
     @Test
-    void testInvalidJacksonJsonMapperPropertiesInsteadOfFields() {
+    void invalidJacksonJsonMapperPropertiesInsteadOfFields() {
         assertThatThrownBy(() -> validateJsonMapper(new InvalidJacksonJsonMapper(new ObjectMapper()
                         .registerModule(new Jdk8Module())
                         .registerModule(new JavaTimeModule())
@@ -51,7 +51,7 @@ public class JsonMapperValidatorTest {
     }
     
     @Test
-    void testInvalidJacksonJsonMapperNoPolymorphism() {
+    void invalidJacksonJsonMapperNoPolymorphism() {
         assertThatThrownBy(() -> validateJsonMapper(new InvalidJacksonJsonMapper(new ObjectMapper()
                         .registerModule(new JavaTimeModule())
                         .setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"))
@@ -65,7 +65,7 @@ public class JsonMapperValidatorTest {
     }
 
     @Test
-    void testInvalidGsonJsonMapper() {
+    void invalidGsonJsonMapper() {
         assertThatThrownBy(() -> validateJsonMapper(new InvalidGsonJsonMapper(new GsonBuilder().create()
                 ))
         )
@@ -74,7 +74,7 @@ public class JsonMapperValidatorTest {
     }
 
     @Test
-    void testInvalidJsonbJsonMapper() {
+    void invalidJsonbJsonMapper() {
         assertThatThrownBy(() -> validateJsonMapper(new InvalidJsonbJsonMapper(new JsonbConfig()))
         )
                 .isInstanceOf(IllegalArgumentException.class)
@@ -82,17 +82,17 @@ public class JsonMapperValidatorTest {
     }
 
     @Test
-    void testValidJacksonJsonMapper() {
+    void validJacksonJsonMapper() {
         assertThatCode(() -> validateJsonMapper(new JacksonJsonMapper())).doesNotThrowAnyException();
     }
 
     @Test
-    void testValidGsonJsonMapper() {
+    void validGsonJsonMapper() {
         assertThatCode(() -> validateJsonMapper(new GsonJsonMapper())).doesNotThrowAnyException();
     }
 
     @Test
-    void testValidJsonBJsonMapper() {
+    void validJsonBJsonMapper() {
         assertThatCode(() -> validateJsonMapper(new JsonbJsonMapper())).doesNotThrowAnyException();
     }
 

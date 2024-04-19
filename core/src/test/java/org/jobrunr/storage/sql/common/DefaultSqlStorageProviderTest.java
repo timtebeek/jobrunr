@@ -24,7 +24,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.jobrunr.jobs.JobTestBuilder.anEnqueuedJob;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 class DefaultSqlStorageProviderTest {
@@ -55,14 +57,14 @@ class DefaultSqlStorageProviderTest {
     }
 
     @Test
-    void testGetJobById() throws SQLException {
+    void getJobById() throws SQLException {
         when(resultSet.next()).thenReturn(false);
 
         assertThatThrownBy(() -> jobStorageProvider.getJobById(randomUUID())).isInstanceOf(JobNotFoundException.class);
     }
 
     @Test
-    void testGetJobById_WhenSqlExceptionOccursAJobStorageExceptionIsThrown() throws SQLException {
+    void getJobByIdWhenSqlExceptionOccursAJobStorageExceptionIsThrown() throws SQLException {
         doThrow(new SQLException("Boem")).when(resultSet).next();
 
         assertThatThrownBy(() -> jobStorageProvider.getJobById(randomUUID())).isInstanceOf(StorageException.class);

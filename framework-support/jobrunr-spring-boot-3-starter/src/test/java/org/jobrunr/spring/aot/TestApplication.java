@@ -19,8 +19,8 @@ import java.util.concurrent.TimeUnit;
 import static org.awaitility.Awaitility.await;
 import static org.jobrunr.jobs.states.StateName.SUCCEEDED;
 
-@SpringBootTest(classes = { JobRunrAutoConfiguration.class, TestApplication.JobRunrStorageProviderTestContextConfiguration.class})
-public class TestApplication {
+@SpringBootTest(classes = {JobRunrAutoConfiguration.class, TestApplication.JobRunrStorageProviderTestContextConfiguration.class})
+class TestApplication {
 
     @Autowired
     JobRequestScheduler jobRequestScheduler;
@@ -40,7 +40,7 @@ public class TestApplication {
     }
 
     @Test
-    void testEnqueue() {
+    void enqueue() {
         JobId jobId = jobRequestScheduler.enqueue(new SysoutJobRequest("Hello from SysoutJobRequest"));
 
         await().atMost(30, TimeUnit.SECONDS).until(() -> storageProvider.getJobById(jobId).hasState(SUCCEEDED));

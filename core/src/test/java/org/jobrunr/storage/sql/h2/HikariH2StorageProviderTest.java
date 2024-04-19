@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import static org.jobrunr.storage.sql.SqlTestUtils.toHikariDataSource;
 
-public class HikariH2StorageProviderTest extends SqlStorageProviderTest {
+class HikariH2StorageProviderTest extends SqlStorageProviderTest {
 
     private static HikariDataSource dataSource;
 
@@ -25,7 +25,7 @@ public class HikariH2StorageProviderTest extends SqlStorageProviderTest {
     }
 
     @AfterAll
-    public static void destroyDatasource() throws SQLException {
+    static void destroyDatasource() throws SQLException {
         dataSource.close();
         dataSource = null;
     }

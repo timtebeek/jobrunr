@@ -31,7 +31,7 @@ class CronExpressionTest {
 
     @ParameterizedTest
     @MethodSource("startInstantCronExpressionAndResultInstant")
-    void testCron(String cronExpression, String baseDate, String expectedResult) {
+    void cron(String cronExpression, String baseDate, String expectedResult) {
         try {
             Instant inputInstant = LocalDateTime.parse(baseDate, dateTimeFormatter).toInstant(UTC);
             CronExpression cron = CronExpression.create(cronExpression);

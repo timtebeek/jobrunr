@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class JobIdTest {
 
     @Test
-    void testEquals() {
+    void equals() {
         UUID uuid = UUID.randomUUID();
         final JobId jobId1 = new JobId(uuid);
         final JobId jobId2 = new JobId(uuid);
@@ -20,7 +20,7 @@ class JobIdTest {
     }
 
     @Test
-    void testNotEquals() {
+    void notEquals() {
         final JobId jobId1 = new JobId(UUID.randomUUID());
         final JobId jobId2 = new JobId(UUID.randomUUID());
 

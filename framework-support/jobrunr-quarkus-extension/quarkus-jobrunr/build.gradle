@@ -137,3 +137,6 @@ signing {
         sign publishing.publications.mavenJava
     }
 }
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

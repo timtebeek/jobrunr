@@ -20,7 +20,9 @@ import java.util.List;
 
 import static org.jobrunr.JobRunrAssertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.atLeastOnce;
 
 @ExtendWith(MockitoExtension.class)
 class DatabaseCreatorTablePrefixTest {
@@ -48,7 +50,7 @@ class DatabaseCreatorTablePrefixTest {
     }
 
     @Test
-    void testIndexesAreCreatedWithoutSchema() throws SQLException {
+    void indexesAreCreatedWithoutSchema() throws SQLException {
         final DatabaseCreator databaseCreator = getDatabaseCreator(dataSource, null, OracleStorageProvider.class);
         databaseCreator.runMigrations();
 
@@ -58,7 +60,7 @@ class DatabaseCreatorTablePrefixTest {
     }
 
     @Test
-    void testIndexesAreCreatedInSchemaForOracle() throws SQLException {
+    void indexesAreCreatedInSchemaForOracle() throws SQLException {
         when(connection.getMetaData()).thenReturn(databaseMetaData);
         when(databaseMetaData.getDatabaseProductName()).thenReturn("Oracle");
 
@@ -71,7 +73,7 @@ class DatabaseCreatorTablePrefixTest {
     }
 
     @Test
-    void testIndexesAreCreatedInSchemaForDB2() throws SQLException {
+    void indexesAreCreatedInSchemaForDB2() throws SQLException {
         when(connection.getMetaData()).thenReturn(databaseMetaData);
         when(databaseMetaData.getDatabaseProductName()).thenReturn("DB2");
 
@@ -84,7 +86,7 @@ class DatabaseCreatorTablePrefixTest {
     }
 
     @Test
-    void testIndexesAreCreatedInSchemaForAnsiDatabase() throws SQLException {
+    void indexesAreCreatedInSchemaForAnsiDatabase() throws SQLException {
         when(connection.getMetaData()).thenReturn(databaseMetaData);
         when(databaseMetaData.getDatabaseProductName()).thenReturn("SQL Server");
 

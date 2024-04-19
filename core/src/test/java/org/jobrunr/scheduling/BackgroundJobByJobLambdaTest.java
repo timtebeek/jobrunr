@@ -108,7 +108,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testCreateViaBuilder() {
+    void createViaBuilder() {
         UUID jobId = UUID.randomUUID();
         BackgroundJob.create(aJob()
                 .withId(jobId)
@@ -123,7 +123,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testCreateViaBuilderAndAnnotationMustFail() {
+    void createViaBuilderAndAnnotationMustFail() {
         assertThatThrownBy(() -> BackgroundJob.create(aJob()
                 .withDetails(() -> testService.doWorkWithAnnotation(3, "Jef Klak"))))
                 .isInstanceOf(IllegalStateException.class)
@@ -131,21 +131,21 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testEnqueueSystemOut() {
+    void enqueueSystemOut() {
         JobId jobId = BackgroundJob.enqueue(() -> System.out.println("this is a test"));
         await().atMost(FIVE_SECONDS).until(() -> storageProvider.getJobById(jobId).getState() == SUCCEEDED);
         assertThat(storageProvider.getJobById(jobId)).hasStates(ENQUEUED, PROCESSING, SUCCEEDED);
     }
 
     @Test
-    void testEnqueue() {
+    void enqueue() {
         JobId jobId = BackgroundJob.enqueue(() -> testService.doWork());
         await().atMost(FIVE_SECONDS).until(() -> storageProvider.getJobById(jobId).getState() == SUCCEEDED);
         assertThat(storageProvider.getJobById(jobId)).hasStates(ENQUEUED, PROCESSING, SUCCEEDED);
     }
 
     @Test
-    void testEnqueueWithId() {
+    void enqueueWithId() {
         UUID id = UUID.randomUUID();
         JobId jobId1 = BackgroundJob.enqueue(id, () -> testService.doWork());
         JobId jobId2 = BackgroundJob.enqueue(id, () -> testService.doWork());
@@ -156,27 +156,27 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    public void testEnqueueWithStaticMethod() {
+    void enqueueWithStaticMethod() {
         final JobId jobId = BackgroundJob.enqueue(TestService::doStaticWork);
         await().atMost(FIVE_SECONDS).untilAsserted(() -> assertThat(storageProvider.getJobById(jobId)).hasStates(ENQUEUED, PROCESSING, SUCCEEDED));
     }
 
     @Test
-    public void testEnqueueWithStaticMethodWithArgument() {
+    void enqueueWithStaticMethodWithArgument() {
         UUID id = UUID.randomUUID();
         final JobId jobId = BackgroundJob.enqueue(() -> StaticTestService.doWorkInStaticMethod(id));
         await().atMost(FIVE_SECONDS).untilAsserted(() -> assertThat(storageProvider.getJobById(jobId)).hasStates(ENQUEUED, PROCESSING, SUCCEEDED));
     }
 
     @Test
-    void testEnqueueWithInterfaceImplementationThrowsNiceException() {
+    void enqueueWithInterfaceImplementationThrowsNiceException() {
         assertThatThrownBy(() -> BackgroundJob.enqueue(new JobImplementation()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Please provide a lambda expression (e.g. BackgroundJob.enqueue(() -> myService.doWork()) instead of an actual implementation.");
     }
 
     @Test
-    void testEnqueueWithCustomObject() {
+    void enqueueWithCustomObject() {
         final TestService.Work work = new TestService.Work(2, "some string", UUID.randomUUID());
         JobId jobId = BackgroundJob.enqueue(() -> testService.doWork(work));
         await().atMost(FIVE_SECONDS).until(() -> storageProvider.getJobById(jobId).getState() == SUCCEEDED);
@@ -184,14 +184,14 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testEnqueueWithPath() {
+    void enqueueWithPath() {
         JobId jobId = BackgroundJob.enqueue(() -> testService.doWorkWithPath(Paths.get("/tmp/jobrunr/example.log")));
         await().atMost(FIVE_SECONDS).until(() -> storageProvider.getJobById(jobId).getState() == SUCCEEDED);
         assertThat(storageProvider.getJobById(jobId)).hasStates(ENQUEUED, PROCESSING, SUCCEEDED);
     }
 
     @Test
-    void testEnqueueWithJobContextAndMetadata() {
+    void enqueueWithJobContextAndMetadata() {
         JobId jobId = BackgroundJob.enqueue(() -> testService.doWork(5, JobContext.Null));
         await().atMost(FIVE_HUNDRED_MILLISECONDS).until(() -> storageProvider.getJobById(jobId).getState() == PROCESSING);
         await().atMost(TWO_SECONDS).until(() -> !storageProvider.getJobById(jobId).getMetadata().isEmpty());
@@ -204,7 +204,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testEnqueueStreamWithMultipleParameters() {
+    void enqueueStreamWithMultipleParameters() {
         Stream<UUID> workStream = getWorkStream();
         AtomicInteger atomicInteger = new AtomicInteger();
         BackgroundJob.enqueue(workStream, (uuid) -> testService.doWork(uuid.toString(), atomicInteger.incrementAndGet(), now()));
@@ -213,7 +213,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testEnqueueStreamWithWrappingObjectAsParameter() {
+    void enqueueStreamWithWrappingObjectAsParameter() {
         AtomicInteger atomicInteger = new AtomicInteger();
         Stream<TestService.Work> workStream = getWorkStream()
                 .map(uuid -> new TestService.Work(atomicInteger.incrementAndGet(), "some string " + uuid, uuid));
@@ -223,7 +223,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testEnqueueStreamWithParameterFromWrappingObject() {
+    void enqueueStreamWithParameterFromWrappingObject() {
         AtomicInteger atomicInteger = new AtomicInteger();
         Stream<TestService.Work> workStream = getWorkStream()
                 .map(uuid -> new TestService.Work(atomicInteger.incrementAndGet(), "some string " + uuid, uuid));
@@ -233,13 +233,13 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testEnqueueStreamWithMethodReference() {
+    void enqueueStreamWithMethodReference() {
         BackgroundJob.enqueue(getWorkStream(), TestService::doWorkWithUUID);
         await().atMost(FIVE_SECONDS).untilAsserted(() -> assertThat(storageProvider.countJobs(SUCCEEDED)).isEqualTo(5));
     }
 
     @Test
-    void testCreateStreamWithJobBuilder() {
+    void createStreamWithJobBuilder() {
         BackgroundJob.create(getWorkStream()
                 .map(uuid -> aJob().withDetails(() -> System.out.println("this is a test")))
         );
@@ -254,14 +254,14 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testFailedJobAddsFailedStateAndScheduledThanksToDefaultRetryFilter() {
+    void failedJobAddsFailedStateAndScheduledThanksToDefaultRetryFilter() {
         JobId jobId = BackgroundJob.enqueue(() -> testService.doWorkThatFails());
         await().atMost(FIVE_SECONDS).untilAsserted(() -> assertThat(storageProvider.getJobById(jobId)).hasStates(ENQUEUED, PROCESSING, FAILED, SCHEDULED));
         assertThat(logAllStateChangesFilter.getStateChanges(jobId)).containsExactly("ENQUEUED->PROCESSING", "PROCESSING->FAILED", "FAILED->SCHEDULED");
     }
 
     @Test
-    void testScheduleWithId() {
+    void scheduleWithId() {
         UUID id = UUID.randomUUID();
         JobId jobId1 = BackgroundJob.schedule(id, now(), () -> testService.doWork());
         JobId jobId2 = BackgroundJob.schedule(id, now().plusSeconds(20), () -> testService.doWork());
@@ -272,7 +272,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testScheduleWithZonedDateTime() {
+    void scheduleWithZonedDateTime() {
         JobId jobId = BackgroundJob.schedule(ZonedDateTime.now().plus(ofMillis(1500)), () -> testService.doWork());
         await().during(ONE_SECOND).until(() -> storageProvider.getJobById(jobId).getState() == SCHEDULED);
         await().atMost(FIVE_SECONDS).until(() -> storageProvider.getJobById(jobId).getState() == SUCCEEDED);
@@ -280,7 +280,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testScheduleWithOffsetDateTime() {
+    void scheduleWithOffsetDateTime() {
         JobId jobId = BackgroundJob.schedule(OffsetDateTime.now().plus(ofMillis(1500)), () -> testService.doWork());
         await().during(ONE_SECOND).until(() -> storageProvider.getJobById(jobId).getState() == SCHEDULED);
         await().atMost(FIVE_SECONDS).until(() -> storageProvider.getJobById(jobId).getState() == SUCCEEDED);
@@ -288,7 +288,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testScheduleWithLocalDateTime() {
+    void scheduleWithLocalDateTime() {
         JobId jobId = BackgroundJob.schedule(LocalDateTime.now().plus(ofMillis(1500)), () -> testService.doWork());
         await().during(ONE_SECOND).until(() -> storageProvider.getJobById(jobId).getState() == SCHEDULED);
         await().atMost(FIVE_SECONDS).until(() -> storageProvider.getJobById(jobId).getState() == SUCCEEDED);
@@ -296,7 +296,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testScheduleWithInstant() {
+    void scheduleWithInstant() {
         JobId jobId = BackgroundJob.schedule(now().plus(ofMillis(1500)), () -> testService.doWork());
         await().during(ONE_SECOND).until(() -> storageProvider.getJobById(jobId).getState() == SCHEDULED);
         await().atMost(FIVE_SECONDS).until(() -> storageProvider.getJobById(jobId).getState() == SUCCEEDED);
@@ -304,28 +304,28 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testScheduleUsingDateTimeInTheFutureIsNotEnqueued() {
+    void scheduleUsingDateTimeInTheFutureIsNotEnqueued() {
         JobId jobId = BackgroundJob.schedule(now().plusSeconds(100), () -> testService.doWork());
         await().during(TWO_SECONDS).atMost(FIVE_SECONDS).until(() -> storageProvider.getJobById(jobId).getState() == SCHEDULED);
         assertThat(storageProvider.getJobById(jobId)).hasStates(SCHEDULED);
     }
 
     @Test
-    void testScheduleThatSchedulesOtherJobs() {
+    void scheduleThatSchedulesOtherJobs() {
         JobId jobId = BackgroundJob.schedule(now().plusSeconds(1), () -> testService.scheduleNewWork(5));
         await().atMost(ONE_MINUTE).until(() -> storageProvider.countJobs(SUCCEEDED) == (5 + 1));
         assertThat(storageProvider.getJobById(jobId)).hasStates(SCHEDULED, ENQUEUED, PROCESSING, SUCCEEDED);
     }
 
     @Test
-    void testScheduleThatSchedulesOtherJobsSlowlyDoesNotBlockOtherWorkers() {
+    void scheduleThatSchedulesOtherJobsSlowlyDoesNotBlockOtherWorkers() {
         JobId jobId = BackgroundJob.schedule(now().plusSeconds(1), () -> testService.scheduleNewWorkSlowly(1));
         await().atMost(ofSeconds(2)).until(() -> (storageProvider.countJobs(PROCESSING) + storageProvider.countJobs(SUCCEEDED)) > 1);
         assertThat(storageProvider.getJobById(jobId)).hasStates(SCHEDULED, ENQUEUED, PROCESSING);
     }
 
     @Test
-    void testRecurringCronJob() {
+    void recurringCronJob() {
         BackgroundJob.scheduleRecurrently(everySecond, () -> testService.doWork(5));
         await().atMost(15, SECONDS).until(() -> storageProvider.countJobs(SUCCEEDED) == 3);
 
@@ -334,7 +334,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testRecurringCronJobFromBuilder() {
+    void recurringCronJobFromBuilder() {
         BackgroundJob.createRecurrently(aRecurringJob()
                 .withCron(everySecond)
                 .withDetails(() -> testService.doWork(5)));
@@ -345,7 +345,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testRecurringCronJobWithJobContext() {
+    void recurringCronJobWithJobContext() {
         BackgroundJob.scheduleRecurrently(everySecond, () -> testService.doWork(5, JobContext.Null));
         await().atMost(15, SECONDS).until(() -> storageProvider.countJobs(SUCCEEDED) == 1);
 
@@ -354,7 +354,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testRecurringCronJobWithId() {
+    void recurringCronJobWithId() {
         BackgroundJob.scheduleRecurrently("theId", everySecond, () -> testService.doWork(5));
         await().atMost(15, SECONDS).until(() -> storageProvider.countJobs(SUCCEEDED) == 1);
 
@@ -363,7 +363,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testRecurringCronJobWithIdAndTimezone() {
+    void recurringCronJobWithIdAndTimezone() {
         BackgroundJob.scheduleRecurrently("theId", everySecond, systemDefault(), () -> testService.doWork(5));
         await().atMost(15, SECONDS).until(() -> storageProvider.countJobs(SUCCEEDED) == 1);
 
@@ -388,7 +388,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testRecurringIntervalJob() {
+    void recurringIntervalJob() {
         BackgroundJob.scheduleRecurrently(Duration.ofSeconds(1), () -> testService.doWork(5));
         await().atMost(15, SECONDS).until(() -> storageProvider.countJobs(SUCCEEDED) == 1);
 
@@ -397,7 +397,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testRecurringIntervalJobFromBuilder() {
+    void recurringIntervalJobFromBuilder() {
         BackgroundJob.createRecurrently(aRecurringJob()
                 .withDuration(Duration.ofSeconds(1))
                 .withDetails(() -> testService.doWork(5)));
@@ -408,7 +408,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testRecurringIntervalJobWithId() {
+    void recurringIntervalJobWithId() {
         BackgroundJob.scheduleRecurrently("theId", Duration.ofSeconds(1), () -> testService.doWork(5));
         await().atMost(15, SECONDS).until(() -> storageProvider.countJobs(SUCCEEDED) == 1);
 
@@ -430,7 +430,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testDeleteOfRecurringJob() {
+    void deleteOfRecurringJob() {
         String jobId = BackgroundJob.scheduleRecurrently(Cron.minutely(), () -> testService.doWork(5));
         BackgroundJob.deleteRecurringJob(jobId);
         assertThat(storageProvider.getRecurringJobs()).isEmpty();
@@ -579,7 +579,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testJobInheritance() {
+    void jobInheritance() {
         SomeSysoutJobClass someSysoutJobClass = new SomeSysoutJobClass(Cron.daily());
         assertThatCode(() -> someSysoutJobClass.schedule()).doesNotThrowAnyException();
     }
@@ -601,7 +601,7 @@ public class BackgroundJobByJobLambdaTest {
     }
 
     @Test
-    void testIssue645() {
+    void issue645() {
         TestService.GithubIssue645 githubIssue645 = new TestService.GithubIssue645();
         JobId jobId = BackgroundJob.enqueue(() -> testService.doWorkForIssue645(githubIssue645.getId(), githubIssue645));
         await().atMost(30, SECONDS).until(() -> storageProvider.getJobById(jobId).hasState(SUCCEEDED));

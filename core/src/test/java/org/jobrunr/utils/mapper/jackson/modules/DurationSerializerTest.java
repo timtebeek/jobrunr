@@ -16,7 +16,7 @@ class DurationSerializerTest {
     DurationSerializer durationSerializer = new DurationSerializer();
 
     @Test
-    void testDurationSerializer() throws IOException {
+    void durationSerializer() throws IOException {
         Duration duration = Duration.ofNanos(323567890098765L);
         JsonGenerator jsonGenerator = mock(JsonGenerator.class);
 

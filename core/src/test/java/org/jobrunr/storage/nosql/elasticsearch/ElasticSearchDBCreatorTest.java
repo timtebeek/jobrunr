@@ -58,7 +58,7 @@ class ElasticSearchDBCreatorTest {
     }
 
     @Test
-    void testMigrations() throws IOException {
+    void migrations() throws IOException {
         ElasticSearchDBCreator elasticSearchDBCreator = new ElasticSearchDBCreator(elasticSearchStorageProviderMock, elasticSearchClient(), null);
 
         assertThat(elasticSearchDBCreator.isNewMigration(new NoSqlMigrationByClass(M001_CreateJobsIndex.class))).isTrue();
@@ -73,7 +73,7 @@ class ElasticSearchDBCreatorTest {
     }
 
     @Test
-    void testValidateIndicesNoIndexPrefix() throws IOException {
+    void validateIndicesNoIndexPrefix() throws IOException {
         ElasticSearchDBCreator elasticSearchDBCreator = new ElasticSearchDBCreator(elasticSearchStorageProviderMock, elasticSearchClient(), null);
         assertThatThrownBy(elasticSearchDBCreator::validateIndices)
                 .isInstanceOf(JobRunrException.class)
@@ -86,7 +86,7 @@ class ElasticSearchDBCreatorTest {
     }
 
     @Test
-    void testValidateIndicesWithIndexPrefix() {
+    void validateIndicesWithIndexPrefix() {
         ElasticSearchDBCreator elasticSearchDBCreator = new ElasticSearchDBCreator(elasticSearchStorageProviderMock, elasticSearchClient(), "my_index_prefix_");
         assertThatThrownBy(elasticSearchDBCreator::validateIndices)
                 .isInstanceOf(JobRunrException.class)
@@ -99,7 +99,7 @@ class ElasticSearchDBCreatorTest {
 
 
     @Test
-    void testMigrationsConcurrent() {
+    void migrationsConcurrent() {
         ElasticSearchDBCreator elasticSearchDBCreator = new ElasticSearchDBCreator(elasticSearchStorageProviderMock, elasticSearchClient(), null) {
             @Override
             protected boolean isNewMigration(NoSqlMigration noSqlMigration) {

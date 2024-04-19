@@ -61,7 +61,7 @@ class MariaDbTablePrefixStorageProviderTest extends AbstractMariaDbStorageProvid
     }
 
     @AfterAll
-    public static void destroyDatasource() {
+    static void destroyDatasource() {
         dataSource.close();
         dataSource = null;
     }

@@ -14,7 +14,9 @@ import java.io.OutputStream;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.atLeastOnce;
 
 @ExtendWith(MockitoExtension.class)
 class HttpResponseTest {
@@ -39,7 +41,7 @@ class HttpResponseTest {
     }
 
     @Test
-    void testError() throws IOException {
+    void error() throws IOException {
         httpResponse.error(new Exception());
 
         verify(httpExchange).sendResponseHeaders(500, 0);

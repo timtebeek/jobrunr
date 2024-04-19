@@ -30,7 +30,7 @@ class SucceededWhileAnyOtherConcurrentStateChangeTest {
     private JobSteward jobZooKeeper;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         allowedStateChange = new SucceededWhileAnyOtherConcurrentStateChange(jobZooKeeper);
     }
 

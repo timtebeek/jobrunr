@@ -29,7 +29,7 @@ class JobBuilderTest {
     private TestService testService;
 
     @Test
-    void testJobBuilderCannotBeCombinedWithAnnotation() {
+    void jobBuilderCannotBeCombinedWithAnnotation() {
         assertThatThrownBy(() ->  aJob()
                 .withDetails(() -> testService.doWork())
                 .build(jobDetailsGenerator))
@@ -38,7 +38,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testDefaultJobWithJobLambda() {
+    void defaultJobWithJobLambda() {
         UUID uuid = UUID.randomUUID();
         Job job = aJob()
                 .withDetails(() -> testService.doWorkWithUUID(uuid))
@@ -51,7 +51,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testDefaultJobWithIoCJobLambda() {
+    void defaultJobWithIoCJobLambda() {
         UUID uuid = UUID.randomUUID();
         Job job = aJob()
                 .<TestService>withDetails(x -> x.doWorkWithUUID(uuid))
@@ -64,7 +64,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testDefaultJobWithJobRequest() {
+    void defaultJobWithJobRequest() {
         Job job = aJob()
                 .withJobRequest(jobRequest)
                 .build();
@@ -76,7 +76,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testWithId() {
+    void withId() {
         UUID id = UUID.randomUUID();
         Job job = aJob()
                 .withId(id)
@@ -89,7 +89,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testWithJobName() {
+    void withJobName() {
         Job job = aJob()
                 .withName("My job name")
                 .withDetails(() -> testService.doWorkWithUUID(UUID.randomUUID()))
@@ -101,7 +101,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testWithScheduleIn() {
+    void withScheduleIn() {
         Job job = aJob()
                 .scheduleIn(Duration.ofMinutes(1))
                 .withDetails(() -> testService.doWorkWithUUID(UUID.randomUUID()))
@@ -113,7 +113,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testWithScheduleAt() {
+    void withScheduleAt() {
         Job job = aJob()
                 .scheduleAt(Instant.now().plusSeconds(60))
                 .withDetails(() -> testService.doWorkWithUUID(UUID.randomUUID()))
@@ -125,7 +125,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testThatOnlyOneOfScheduleInScheduleIsAllowed() {
+    void thatOnlyOneOfScheduleInScheduleIsAllowed() {
         assertThatThrownBy(() -> aJob().scheduleAt(Instant.now()).scheduleIn(Duration.ZERO).build(jobDetailsGenerator))
                 .isInstanceOf(IllegalArgumentException.class);
 
@@ -134,7 +134,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testWithAmountOfRetries() {
+    void withAmountOfRetries() {
         int amountOfRetries = 5;
 
         Job job = aJob()
@@ -148,7 +148,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testWithLabels() {
+    void withLabels() {
         Job job = aJob()
                 .withLabels(Set.of("TestLabel", "Email"))
                 .withDetails(() -> testService.doWorkWithUUID(UUID.randomUUID()))
@@ -160,7 +160,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testMaxAmountOfLabels() {
+    void maxAmountOfLabels() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> aJob()
                         .withLabels("TestLabel", "Email", "Automated", "Too many")
@@ -169,7 +169,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testMaxLengthOfLabel() {
+    void maxLengthOfLabel() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> aJob()
                         .withLabels("Label longer than 45 characters should throw an exception")
@@ -178,7 +178,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testJobDetailsCanOnlyBeSet1Way() {
+    void jobDetailsCanOnlyBeSet1Way() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> aJob()
                         .withJobRequest(jobRequest)
@@ -191,7 +191,7 @@ class JobBuilderTest {
     }
 
     @Test
-    void testBuildWithIncorrectJobDetails() {
+    void buildWithIncorrectJobDetails() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> aJob()
                         .withJobRequest(jobRequest)

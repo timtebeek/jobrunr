@@ -27,7 +27,7 @@ class IntervalTest {
 
     @ParameterizedTest
     @MethodSource("startInstantDurationAndResultInstant")
-    void testInterval(String durationExpression, String baseDateTime, String currentDateTime, String expectedDateTime) {
+    void interval(String durationExpression, String baseDateTime, String currentDateTime, String expectedDateTime) {
         try {
             Instant baseInstant = LocalDateTime.parse(baseDateTime, dateTimeFormatter).toInstant(UTC);
             Instant currentInstant = LocalDateTime.parse(currentDateTime, dateTimeFormatter).toInstant(UTC);

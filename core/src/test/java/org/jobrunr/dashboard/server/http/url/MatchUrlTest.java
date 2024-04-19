@@ -7,43 +7,43 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MatchUrlTest {
 
     @Test
-    void testNoMatch() {
+    void noMatch() {
         boolean matches = new MatchUrl("/api").matches("/dashboard");
         assertThat(matches).isFalse();
     }
 
     @Test
-    void testMatch() {
+    void match() {
         boolean matches = new MatchUrl("/api/jobs").matches("/api/jobs");
         assertThat(matches).isTrue();
     }
 
     @Test
-    void testNoMatchWithParamsAndDifferentSize() {
+    void noMatchWithParamsAndDifferentSize() {
         boolean matches = new MatchUrl("/api/jobs/enqueued/test").matches("/api/jobs/:state/test/extra");
         assertThat(matches).isFalse();
     }
 
     @Test
-    void testMatchWithParams() {
+    void matchWithParams() {
         boolean matches = new MatchUrl("/api/jobs/enqueued/test").matches("/api/jobs/:state/test");
         assertThat(matches).isTrue();
     }
 
     @Test
-    void testNoMatchWithParams() {
+    void noMatchWithParams() {
         boolean matches = new MatchUrl("/api/jobs/enqueued/wrong").matches("/api/jobs/:state/test");
         assertThat(matches).isFalse();
     }
 
     @Test
-    void testToRequestUrl() {
+    void toRequestUrl() {
         RequestUrl requestUrl = new MatchUrl("/api/jobs/enqueued/test").toRequestUrl("/api/jobs/:state/test");
         assertThat(requestUrl.param(":state")).isEqualTo("enqueued");
     }
 
     @Test
-    void testToRequestUrlWithQueryParams() {
+    void toRequestUrlWithQueryParams() {
         RequestUrl requestUrl = new MatchUrl("/api/jobs/enqueued?offset=2").toRequestUrl("/api/jobs/:state");
         assertThat(requestUrl.param(":state")).isEqualTo("enqueued");
     }

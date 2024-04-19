@@ -9,7 +9,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static java.util.UUID.randomUUID;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class BackgroundJobServerMetricsBinderTest {
@@ -28,7 +30,7 @@ class BackgroundJobServerMetricsBinderTest {
     }
 
     @Test
-    void testBinder() {
+    void binder() {
         new BackgroundJobServerMetricsBinder(backgroundJobServer, meterRegistry);
 
         verify(meterRegistry, times(2)).more();

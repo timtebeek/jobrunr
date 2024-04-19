@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class IOUtilsTest {
 
     @Test
-    void testCopyStreamToWriter() throws IOException {
+    void copyStreamToWriter() throws IOException {
         InputStream inputStream = new ByteArrayInputStream("test".getBytes(StandardCharsets.UTF_8));
         StringWriter stringWriter = new StringWriter();
         IOUtils.copyStream(inputStream, stringWriter);
@@ -19,7 +19,7 @@ class IOUtilsTest {
     }
 
     @Test
-    void testCopyStreamOutputStream() throws IOException {
+    void copyStreamOutputStream() throws IOException {
         InputStream inputStream = new ByteArrayInputStream("test".getBytes(StandardCharsets.UTF_8));
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         IOUtils.copyStream(inputStream, outputStream);

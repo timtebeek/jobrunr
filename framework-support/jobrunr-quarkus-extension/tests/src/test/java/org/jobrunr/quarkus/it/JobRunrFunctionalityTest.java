@@ -14,12 +14,12 @@ import static org.jobrunr.utils.StringUtils.substringAfter;
 
 @QuarkusTest
 @DisplayName("Tests JobRunr Quarkus extension")
-public class JobRunrFunctionalityTest {
+class JobRunrFunctionalityTest {
 
     private final TeenyHttpClient restApi = new TeenyHttpClient("http://localhost:8081");
 
     @Test
-    public void testEnqueueAndProcessJob() {
+    void enqueueAndProcessJob() {
         final HttpResponse<String> response = restApi.post("/jobrunr/jobs");
         assertThat(response)
                 .hasStatusCode(200)
@@ -30,7 +30,7 @@ public class JobRunrFunctionalityTest {
     }
 
     @Test
-    public void testRecurringJobs() {
+    void recurringJobs() {
         final HttpResponse<String> response = restApi.get("/jobrunr/recurring-jobs");
         assertThat(response)
                 .hasStatusCode(200)
@@ -45,7 +45,7 @@ public class JobRunrFunctionalityTest {
     }
 
     @Test
-    public void testJobRunrHealthCheck() {
+    void jobRunrHealthCheck() {
         final HttpResponse<String> response = restApi.get("/q/health/ready");
         assertThat(response)
                 .hasStatusCode(200)
@@ -54,7 +54,7 @@ public class JobRunrFunctionalityTest {
     }
 
     @Test
-    public void testJobRunrMetrics() {
+    void jobRunrMetrics() {
         final HttpResponse<String> response = restApi.get("/q/metrics");
         assertThat(response)
                 .hasStatusCode(200)

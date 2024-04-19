@@ -20,7 +20,7 @@ class PostgresStorageProviderTest extends AbstractPostgresStorageProviderTest {
     }
 
     @AfterAll
-    public static void destroyDatasource() {
+    static void destroyDatasource() {
         dataSource.close();
         dataSource = null;
     }

@@ -33,7 +33,7 @@ class MySQLTablePrefixStorageProviderTest extends AbstractMySQLStorageProviderTe
     }
 
     @AfterAll
-    public static void destroyDatasource() {
+    static void destroyDatasource() {
         dataSource = null;
     }
 

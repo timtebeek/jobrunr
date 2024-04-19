@@ -26,7 +26,7 @@ class JobStateChangedWhileProcessingConcurrentStateChangeTest {
     private JobSteward jobSteward;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         allowedStateChange = new JobStateChangedWhileProcessingConcurrentStateChange(jobSteward);
     }
 

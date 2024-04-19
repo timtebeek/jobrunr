@@ -50,7 +50,7 @@ abstract class JobMapperTest {
     protected abstract JsonMapper getJsonMapper();
 
     @Test
-    void testSerializeAndDeserializeJobWithVersion() {
+    void serializeAndDeserializeJobWithVersion() {
         Job job = anEnqueuedJob()
                 .withVersion(2)
                 .build();
@@ -62,7 +62,7 @@ abstract class JobMapperTest {
     }
 
     @Test
-    void testSerializeAndDeserializeProcessingJobWithLogs() {
+    void serializeAndDeserializeProcessingJobWithLogs() {
         Job job = anEnqueuedJob().withState(new ProcessingState(UUID.randomUUID(), "not important")).build();
         final RunnerJobContext jobContext = new RunnerJobContext(job);
         jobContext.logger().info("test 1");
@@ -77,7 +77,7 @@ abstract class JobMapperTest {
     }
 
     @Test
-    void testSerializeAndDeserializeJobWithPath() {
+    void serializeAndDeserializeJobWithPath() {
         Job job = anEnqueuedJob().withJobDetails(() -> testService.doWorkWithPath(Paths.get("/tmp", "jobrunr", "log.txt"))).build();
 
         String jobAsString = jobMapper.serializeJob(job);
@@ -86,7 +86,7 @@ abstract class JobMapperTest {
     }
 
     @Test
-    void testSerializeAndDeserializeJobWithLabel() {
+    void serializeAndDeserializeJobWithLabel() {
         Job job = anEnqueuedJob().withLabels("first label", "second label").build();
 
         String jobAsString = jobMapper.serializeJob(job);

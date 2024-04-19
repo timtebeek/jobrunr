@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class DesktopUtilsTest {
 
     @Test
-    void testSupportSystemSleepDetection() {
+    void supportSystemSleepDetection() {
         boolean supportsSystemSleepDetection = DesktopUtils.systemSupportsSleepDetection();
         if (System.getenv("CI") != null) {
             assertThat(supportsSystemSleepDetection).isFalse();

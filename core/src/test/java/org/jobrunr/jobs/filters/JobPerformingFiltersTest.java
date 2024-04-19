@@ -159,7 +159,7 @@ class JobPerformingFiltersTest {
     }
 
     @Test
-    void testAllFilters() {
+    void allFilters() {
         Job job = anEnqueuedJob().build();
 
         LogAllStateChangesFilter logAllStateChangesFilter = new LogAllStateChangesFilter();

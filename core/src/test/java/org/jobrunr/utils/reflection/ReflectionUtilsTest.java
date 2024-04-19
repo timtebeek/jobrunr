@@ -21,7 +21,7 @@ import static org.jobrunr.utils.reflection.ReflectionUtils.objectContainsFieldOr
 class ReflectionUtilsTest {
 
     @Test
-    void testToClass() {
+    void toClass() {
         assertThat(ReflectionUtils.toClass("boolean")).isEqualTo(boolean.class);
         assertThat(ReflectionUtils.toClass("byte")).isEqualTo(byte.class);
         assertThat(ReflectionUtils.toClass("short")).isEqualTo(short.class);
@@ -37,7 +37,7 @@ class ReflectionUtilsTest {
     }
 
     @Test
-    void testObjectContainsFieldOrProperty() {
+    void objectContainsFieldOrProperty() {
         final TestObject test = new TestObject("test");
 
         assertThat(objectContainsFieldOrProperty(test, "field")).isTrue();
@@ -46,7 +46,7 @@ class ReflectionUtilsTest {
     }
 
     @Test
-    void testGetValueFromFieldOrProperty() {
+    void getValueFromFieldOrProperty() {
         final TestObject test = new TestObject("test");
 
         assertThat(getValueFromFieldOrProperty(test, "field")).isEqualTo("test");
@@ -55,7 +55,7 @@ class ReflectionUtilsTest {
     }
 
     @Test
-    void testAutobox() {
+    void autobox() {
         assertThat(ReflectionUtils.autobox(null, String.class)).isEqualTo(null);
         assertThat(ReflectionUtils.autobox("string", String.class)).isEqualTo("string");
         assertThat(ReflectionUtils.autobox(1, int.class)).isEqualTo(1);
@@ -72,7 +72,7 @@ class ReflectionUtilsTest {
     }
 
     @Test
-    void testAutoboxClob() throws SQLException {
+    void autoboxClob() throws SQLException {
         Clob clob = Mockito.mock(Clob.class);
         String result = "the result";
 
@@ -83,13 +83,13 @@ class ReflectionUtilsTest {
     }
 
     @Test
-    void testFindMethodOnInterface() {
+    void findMethodOnInterface() {
         final Optional<Method> doWork = ReflectionUtils.findMethod(TestInterface.class, "doWork");
         assertThat(doWork).isPresent();
     }
 
     @Test
-    void testFindMethodOnSuperInterface() {
+    void findMethodOnSuperInterface() {
         final Optional<Method> doWorkFromParentInterfaceA = ReflectionUtils.findMethod(TestInterface.class, "doWorkFromParentInterfaceA");
         assertThat(doWorkFromParentInterfaceA).isPresent();
 

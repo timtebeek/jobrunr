@@ -13,7 +13,9 @@ import java.util.concurrent.atomic.AtomicLong;
 import static org.jobrunr.storage.JobStats.empty;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class StorageProviderMetricsBinderTest {
@@ -29,7 +31,7 @@ class StorageProviderMetricsBinderTest {
     }
 
     @Test
-    void testBinder() {
+    void binder() {
         new StorageProviderMetricsBinder(storageProvider, meterRegistry);
 
         verify(meterRegistry, times(9)).gauge(anyString(), any(), any(AtomicLong.class));

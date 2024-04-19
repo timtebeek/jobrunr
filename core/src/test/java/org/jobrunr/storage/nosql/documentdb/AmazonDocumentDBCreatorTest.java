@@ -38,7 +38,7 @@ class AmazonDocumentDBCreatorTest {
     }
 
     @Test
-    void testMigrationsHappyPath() {
+    void migrationsHappyPath() {
         AmazonDocumentDBCreator amazonDocumentDBCreator = new AmazonDocumentDBCreator(mongoClient(), MongoDBStorageProvider.DEFAULT_DB_NAME);
 
         assertThatCode(amazonDocumentDBCreator::runMigrations).doesNotThrowAnyException();

@@ -34,7 +34,7 @@ class ScheduledTooEarlyByJobZooKeeperConcurrentStateChangeTest {
 
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         allowedStateChange = new ScheduledTooEarlyByJobZooKeeperConcurrentStateChange(storageProvider);
     }
 

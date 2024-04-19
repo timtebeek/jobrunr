@@ -38,3 +38,6 @@ jib {
 sonar {
     skipProject = true
 }
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

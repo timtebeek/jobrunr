@@ -33,7 +33,7 @@ class OracleStorageProviderTest extends AbstractOracleStorageProviderTest {
     }
 
     @AfterAll
-    public static void destroyDatasource() {
+    static void destroyDatasource() {
         dataSource.close();
         dataSource = null;
     }

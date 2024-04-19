@@ -22,13 +22,13 @@ class JacksonUsingJSR310JavaTimeModuleJsonMapperTest extends AbstractJsonMapperT
     }
 
     @Test
-    void testTypeIdJavaTimeModule() {
+    void typeIdJavaTimeModule() {
         assertThat(new JavaTimeModule().getTypeId()).isEqualTo("jackson-datatype-jsr310");
     }
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/451")
-    void testCanDeserializeWithJsonCreator() {
+    void canDeserializeWithJsonCreator() {
         SomeParameter someParameter = new SomeParameter(3);
         Job job = anEnqueuedJob()
                 .withJobDetails(() -> doWorkWithParameter(someParameter))
@@ -47,7 +47,7 @@ class JacksonUsingJSR310JavaTimeModuleJsonMapperTest extends AbstractJsonMapperT
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/779")
     @Deprecated
-    void testCreatorHasDefaultVisibilityInJacksonObjectMapper() {
+    void creatorHasDefaultVisibilityInJacksonObjectMapper() {
         Object objectMapper = Whitebox.getInternalState(jsonMapper, "objectMapper");
         Object configOverrides = Whitebox.getInternalState(objectMapper, "_configOverrides");
         Object visibilityChecker = Whitebox.getInternalState(configOverrides, "_visibilityChecker");

@@ -12,14 +12,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 class DatabaseMigrationsProviderTest {
 
     @Test
-    void testGetMigrations() {
+    void getMigrations() {
         final DatabaseMigrationsProvider databaseCreator = new DatabaseMigrationsProvider(null);
         final Stream<SqlMigration> databaseSpecificMigrations = databaseCreator.getMigrations();
         assertThat(databaseSpecificMigrations).anyMatch(migration -> migration.getFileName().equals("v000__create_migrations_table.sql"));
     }
 
     @Test
-    void testDatabaseSpecificMigrations() {
+    void databaseSpecificMigrations() {
         final DatabaseMigrationsProvider databaseCreator = new DatabaseMigrationsProvider(MariaDbStorageProviderStub.class);
         final Stream<SqlMigration> databaseSpecificMigrations = databaseCreator.getMigrations();
 

@@ -15,7 +15,7 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class JobRunrHealthIndicatorTest {
+class JobRunrHealthIndicatorTest {
 
     @Mock
     private JobRunrProperties.BackgroundJobServer backgroundJobServerProperties;

@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TransactionTest {
@@ -18,7 +20,7 @@ class TransactionTest {
     private Connection connection;
 
     @Test
-    void testTransactionSucceedsWithAutocommitTrue() throws SQLException {
+    void transactionSucceedsWithAutocommitTrue() throws SQLException {
         //GIVEN
         when(connection.getAutoCommit()).thenReturn(true, false);
         final Transaction transaction = new Transaction(connection);
@@ -34,7 +36,7 @@ class TransactionTest {
     }
 
     @Test
-    void testTransactionSucceedsWithAutocommitFalse() throws SQLException {
+    void transactionSucceedsWithAutocommitFalse() throws SQLException {
         //GIVEN
         when(connection.getAutoCommit()).thenReturn(false);
         final Transaction transaction = new Transaction(connection);
@@ -50,7 +52,7 @@ class TransactionTest {
     }
 
     @Test
-    void testTransactionFailsWithAutocommitTrue() throws SQLException {
+    void transactionFailsWithAutocommitTrue() throws SQLException {
         //GIVEN
         when(connection.getAutoCommit()).thenReturn(true, false);
         final Transaction transaction = new Transaction(connection);
@@ -65,7 +67,7 @@ class TransactionTest {
     }
 
     @Test
-    void testTransactionFailsWithAutocommitFalse() throws SQLException {
+    void transactionFailsWithAutocommitFalse() throws SQLException {
         //GIVEN
         when(connection.getAutoCommit()).thenReturn(false);
         final Transaction transaction = new Transaction(connection);

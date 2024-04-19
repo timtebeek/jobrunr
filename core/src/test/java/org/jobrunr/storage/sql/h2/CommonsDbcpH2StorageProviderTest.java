@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 
 import java.sql.SQLException;
 
-public class CommonsDbcpH2StorageProviderTest extends SqlStorageProviderTest {
+class CommonsDbcpH2StorageProviderTest extends SqlStorageProviderTest {
 
     private static BasicDataSource dataSource;
 
@@ -27,7 +27,7 @@ public class CommonsDbcpH2StorageProviderTest extends SqlStorageProviderTest {
     }
 
     @AfterAll
-    public static void destroyDatasource() throws SQLException {
+    static void destroyDatasource() throws SQLException {
         dataSource.close();
         dataSource = null;
     }

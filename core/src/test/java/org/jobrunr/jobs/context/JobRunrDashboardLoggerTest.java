@@ -49,14 +49,14 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testInfoLoggingWithoutJob() {
+    void infoLoggingWithoutJob() {
         jobRunrDashboardLogger.info("simple message");
 
         verify(slfLogger).info("simple message");
     }
 
     @Test
-    void testInfoLoggingWithJob() {
+    void infoLoggingWithJob() {
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
 
@@ -67,7 +67,7 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testInfoLoggingWithJobAndFormattingOneArgument() {
+    void infoLoggingWithJobAndFormattingOneArgument() {
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
 
@@ -78,7 +78,7 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testInfoLoggingWithJobAndFormattingMultipleArguments() {
+    void infoLoggingWithJobAndFormattingMultipleArguments() {
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
 
@@ -89,14 +89,14 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testWarnLoggingWithoutJob() {
+    void warnLoggingWithoutJob() {
         jobRunrDashboardLogger.warn("simple message");
 
         verify(slfLogger).warn("simple message");
     }
 
     @Test
-    void testWarnLoggingWithJob() {
+    void warnLoggingWithJob() {
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
 
@@ -107,7 +107,7 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testWarnLoggingWithJobAndFormattingOneArgument() {
+    void warnLoggingWithJobAndFormattingOneArgument() {
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
 
@@ -118,7 +118,7 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testWarnLoggingWithJobAndFormattingMultipleArguments() {
+    void warnLoggingWithJobAndFormattingMultipleArguments() {
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
 
@@ -129,14 +129,14 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testErrorLoggingWithoutJob() {
+    void errorLoggingWithoutJob() {
         jobRunrDashboardLogger.error("simple message");
 
         verify(slfLogger).error("simple message");
     }
 
     @Test
-    void testErrorLoggingWithJob() {
+    void errorLoggingWithJob() {
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
 
@@ -147,7 +147,7 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testErrorLoggingWithJobAndFormattingOneArgument() {
+    void errorLoggingWithJobAndFormattingOneArgument() {
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
 
@@ -158,7 +158,7 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testErrorLoggingWithJobAndFormattingMultipleArguments() {
+    void errorLoggingWithJobAndFormattingMultipleArguments() {
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
 
@@ -169,7 +169,7 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testInfoLoggingWithJobAndThreshold() {
+    void infoLoggingWithJobAndThreshold() {
         jobRunrDashboardLogger = new JobRunrDashboardLogger(slfLogger, Level.WARN);
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
@@ -181,7 +181,7 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testWarnLoggingWithJobAndThreshold() {
+    void warnLoggingWithJobAndThreshold() {
         jobRunrDashboardLogger = new JobRunrDashboardLogger(slfLogger, Level.ERROR);
         final Job job = aJobInProgress().build();
         JobRunrDashboardLogger.setJob(job);
@@ -217,142 +217,142 @@ class JobRunrDashboardLoggerTest {
     }
 
     @Test
-    void testName() {
+    void name() {
         when(slfLogger.getName()).thenReturn("the name");
         assertThat(jobRunrDashboardLogger.getName()).isEqualTo("the name");
     }
 
     @Test
-    void testIsTraceEnabled() {
+    void isTraceEnabled() {
         jobRunrDashboardLogger.isTraceEnabled();
         verify(slfLogger).isTraceEnabled();
     }
 
     @Test
-    void testTrace() {
+    void trace() {
         jobRunrDashboardLogger.trace("trace");
         verify(slfLogger).trace("trace");
     }
 
     @Test
-    void testTraceWithFormat() {
+    void traceWithFormat() {
         jobRunrDashboardLogger.trace("trace with {}", "format");
         verify(slfLogger).trace("trace with {}", "format");
     }
 
     @Test
-    void testTraceWithFormat2() {
+    void traceWithFormat2() {
         jobRunrDashboardLogger.trace("trace with {} {}", "format1", "format2");
         verify(slfLogger).trace("trace with {} {}", "format1", "format2");
     }
 
     @Test
-    void testTraceWithFormat3() {
+    void traceWithFormat3() {
         jobRunrDashboardLogger.trace("trace with {} {} {}", "format1", "format2", "format3");
         verify(slfLogger).trace("trace with {} {} {}", "format1", "format2", "format3");
     }
 
     @Test
-    void testTraceWithException() {
+    void traceWithException() {
         Exception exception = new Exception();
         jobRunrDashboardLogger.trace("trace", exception);
         verify(slfLogger).trace("trace", exception);
     }
 
     @Test
-    void testMarkerTrace() {
+    void markerTrace() {
         jobRunrDashboardLogger.trace(marker, "trace");
         verify(slfLogger).trace(marker, "trace");
     }
 
     @Test
-    void testMarkerTraceWithFormat() {
+    void markerTraceWithFormat() {
         jobRunrDashboardLogger.trace(marker, "trace with {}", "format");
         verify(slfLogger).trace(marker, "trace with {}", "format");
     }
 
     @Test
-    void testMarkerTraceWithFormat2() {
+    void markerTraceWithFormat2() {
         jobRunrDashboardLogger.trace(marker, "trace with {} {}", "format1", "format2");
         verify(slfLogger).trace(marker, "trace with {} {}", "format1", "format2");
     }
 
     @Test
-    void testMarkerTraceWithFormat3() {
+    void markerTraceWithFormat3() {
         jobRunrDashboardLogger.trace(marker, "trace with {} {} {}", "format1", "format2", "format3");
         verify(slfLogger).trace(marker, "trace with {} {} {}", "format1", "format2", "format3");
     }
 
     @Test
-    void testMarkerTraceWithException() {
+    void markerTraceWithException() {
         Exception exception = new Exception();
         jobRunrDashboardLogger.trace(marker, "trace", exception);
         verify(slfLogger).trace(marker, "trace", exception);
     }
 
     @Test
-    void testIsDebugEnabled() {
+    void isDebugEnabled() {
         jobRunrDashboardLogger.isDebugEnabled();
         verify(slfLogger).isDebugEnabled();
     }
 
     @Test
-    void testDebug() {
+    void debug() {
         jobRunrDashboardLogger.debug("Debug");
         verify(slfLogger).debug("Debug");
     }
 
     @Test
-    void testDebugWithFormat() {
+    void debugWithFormat() {
         jobRunrDashboardLogger.debug("Debug with {}", "format");
         verify(slfLogger).debug("Debug with {}", "format");
     }
 
     @Test
-    void testDebugWithFormat2() {
+    void debugWithFormat2() {
         jobRunrDashboardLogger.debug("Debug with {} {}", "format1", "format2");
         verify(slfLogger).debug("Debug with {} {}", "format1", "format2");
     }
 
     @Test
-    void testDebugWithFormat3() {
+    void debugWithFormat3() {
         jobRunrDashboardLogger.debug("Debug with {} {} {}", "format1", "format2", "format3");
         verify(slfLogger).debug("Debug with {} {} {}", "format1", "format2", "format3");
     }
 
     @Test
-    void testDebugWithException() {
+    void debugWithException() {
         Exception exception = new Exception();
         jobRunrDashboardLogger.debug("Debug", exception);
         verify(slfLogger).debug("Debug", exception);
     }
 
     @Test
-    void testMarkerDebug() {
+    void markerDebug() {
         jobRunrDashboardLogger.debug(marker, "Debug");
         verify(slfLogger).debug(marker, "Debug");
     }
 
     @Test
-    void testMarkerDebugWithFormat() {
+    void markerDebugWithFormat() {
         jobRunrDashboardLogger.debug(marker, "Debug with {}", "format");
         verify(slfLogger).debug(marker, "Debug with {}", "format");
     }
 
     @Test
-    void testMarkerDebugWithFormat2() {
+    void markerDebugWithFormat2() {
         jobRunrDashboardLogger.debug(marker, "Debug with {} {}", "format1", "format2");
         verify(slfLogger).debug(marker, "Debug with {} {}", "format1", "format2");
     }
 
     @Test
-    void testMarkerDebugWithFormat3() {
+    void markerDebugWithFormat3() {
         jobRunrDashboardLogger.debug(marker, "Debug with {} {} {}", "format1", "format2", "format3");
         verify(slfLogger).debug(marker, "Debug with {} {} {}", "format1", "format2", "format3");
     }
 
     @Test
-    void testMarkerDebugWithException() {
+    void markerDebugWithException() {
         Exception exception = new Exception();
         jobRunrDashboardLogger.debug(marker, "Debug", exception);
         verify(slfLogger).debug(marker, "Debug", exception);

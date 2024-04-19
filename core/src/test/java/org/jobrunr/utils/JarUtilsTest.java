@@ -30,7 +30,7 @@ class JarUtilsTest {
     }
 
     @Test
-    void testGetManifestAttributeValue() {
+    void getManifestAttributeValue() {
         assertThat(JarUtils.getManifestAttributeValue(Gson.class, "Bundle-Developers")).contains("google.com");
     }
 

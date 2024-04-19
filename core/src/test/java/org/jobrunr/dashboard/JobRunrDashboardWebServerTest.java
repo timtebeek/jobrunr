@@ -58,7 +58,7 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testGetJobById_ForEnqueuedJob() {
+    void getJobByIdForEnqueuedJob() {
         final Job job = anEnqueuedJob().build();
         final Job savedJob = storageProvider.save(job);
 
@@ -67,7 +67,7 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testGetJobById_ForFailedJob() {
+    void getJobByIdForFailedJob() {
         final Job job = aFailedJobWithRetries().build();
         final Job savedJob = storageProvider.save(job);
 
@@ -78,7 +78,7 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testRequeueJob() {
+    void requeueJob() {
         final Job job = aFailedJobWithRetries().build();
         final Job savedJob = storageProvider.save(job);
 
@@ -89,7 +89,7 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testDeleteJob() {
+    void deleteJob() {
         final Job job = aFailedJobWithRetries().build();
         final Job savedJob = storageProvider.save(job);
 
@@ -102,13 +102,13 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testGetJobById_JobNotFoundReturns404() {
+    void getJobByIdJobNotFoundReturns404() {
         HttpResponse<String> getResponse = http.get("/api/jobs/%s", randomUUID());
         assertThat(getResponse).hasStatusCode(404);
     }
 
     @Test
-    void testFindJobsByState() {
+    void findJobsByState() {
         storageProvider.save(anEnqueuedJob().build());
 
         HttpResponse<String> getResponse = http.get("/api/jobs?state=ENQUEUED");
@@ -118,7 +118,7 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testGetProblems() {
+    void getProblems() {
         storageProvider.save(aJob().withJobDetails(methodThatDoesNotExistJobDetails()).withState(new ScheduledState(Instant.now().plus(1, ChronoUnit.DAYS))).build());
 
         HttpResponse<String> getResponse = http.get("/api/problems");
@@ -128,7 +128,7 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testDeleteProblem() {
+    void deleteProblem() {
         storageProvider.saveMetadata(new JobRunrMetadata(SevereJobRunrException.class.getSimpleName(), "some id", "some value"));
 
         HttpResponse<String> getResponseBeforeDelete = http.get("/api/problems");
@@ -145,7 +145,7 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testGetRecurringJobs() {
+    void getRecurringJobs() {
         storageProvider.saveRecurringJob(aDefaultRecurringJob().withId("recurring-job-1").withName("Import sales data").build());
         storageProvider.saveRecurringJob(aDefaultRecurringJob().withId("recurring-job-2").withName("Generate sales reports").build());
 
@@ -156,7 +156,7 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testDeleteRecurringJob() {
+    void deleteRecurringJob() {
         storageProvider.saveRecurringJob(aDefaultRecurringJob().withId("recurring-job-1").withName("Import sales data").build());
         storageProvider.saveRecurringJob(aDefaultRecurringJob().withId("recurring-job-2").withName("Generate sales reports").build());
 
@@ -166,7 +166,7 @@ abstract class JobRunrDashboardWebServerTest {
     }
 
     @Test
-    void testGetBackgroundJobServers() {
+    void getBackgroundJobServers() {
         final BackgroundJobServerStatus serverStatus = aDefaultBackgroundJobServerStatus().withIsStarted().build();
         storageProvider.announceBackgroundJobServer(serverStatus);
 

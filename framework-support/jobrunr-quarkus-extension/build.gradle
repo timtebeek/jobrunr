@@ -4,3 +4,6 @@ subprojects {
 
     group 'org.jobrunr'
 }
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}

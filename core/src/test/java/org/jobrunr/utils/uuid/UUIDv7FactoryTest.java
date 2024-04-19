@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 class UUIDv7FactoryTest {
     
     @Test
-    void testNoCollisions() throws InterruptedException {
+    void noCollisions() throws InterruptedException {
         int threadCount = 64;
         int iterationCount = 20_000;
         Map<UUID, Long> uuidMap = new ConcurrentHashMap<>();

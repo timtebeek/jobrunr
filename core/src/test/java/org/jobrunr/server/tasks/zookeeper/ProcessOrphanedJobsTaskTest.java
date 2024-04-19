@@ -35,7 +35,7 @@ class ProcessOrphanedJobsTaskTest extends AbstractTaskTest {
     }
 
     @Test
-    void testTaskAndStateChangeFilters() {
+    void taskAndStateChangeFilters() {
         final Job orphanedJob = aJobInProgress().build();
         when(storageProvider.getJobList(eq(PROCESSING), any(Instant.class), any()))
                 .thenReturn(

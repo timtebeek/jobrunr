@@ -104,7 +104,7 @@ class JobTest {
     }
 
     @Test
-    void testStateChangesOnCreateOfJobIfVersionEqualTo0() {
+    void stateChangesOnCreateOfJobIfVersionEqualTo0() {
         // WHEN
         Job job = anEnqueuedJob()
                 .withVersion(0)
@@ -116,7 +116,7 @@ class JobTest {
     }
 
     @Test
-    void testNoStateChangesOnCreateOfJobIfVersionGreaterThan0() {
+    void noStateChangesOnCreateOfJobIfVersionGreaterThan0() {
         // WHEN
         Job job = anEnqueuedJob()
                 .withVersion(1)
@@ -128,7 +128,7 @@ class JobTest {
     }
 
     @Test
-    void testStateChangesOnlyOneStateChange() {
+    void stateChangesOnlyOneStateChange() {
         // WHEN
         Job job = anEnqueuedJob().withInitialStateChanges().build();
         // THEN
@@ -147,7 +147,7 @@ class JobTest {
     }
 
     @Test
-    void testStateChangesMultipleStateChanges() {
+    void stateChangesMultipleStateChanges() {
         // WHEN
         Job job = anEnqueuedJob().withInitialStateChanges().build();
 
@@ -167,7 +167,7 @@ class JobTest {
     }
 
     @Test
-    void testStateChangesResetsStateChanges() {
+    void stateChangesResetsStateChanges() {
         // WHEN
         Job job = anEnqueuedJob().withInitialStateChanges().build();
 

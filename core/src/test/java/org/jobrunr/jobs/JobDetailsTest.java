@@ -12,14 +12,14 @@ import static org.jobrunr.jobs.JobDetailsTestBuilder.jobDetails;
 class JobDetailsTest {
 
     @Test
-    void testJobDetailsDefaultConstructor() {
+    void jobDetailsDefaultConstructor() {
         final JobDetails jobDetails = new JobDetails("some.class.Name", null, "run", emptyList());
 
         assertThat(jobDetails).isNotCacheable();
     }
 
     @Test
-    void testJobDetails() {
+    void jobDetails() {
         JobDetails jobDetails = jobDetails()
                 .withClassName(TestService.class)
                 .withMethodName("doWork")
@@ -38,7 +38,7 @@ class JobDetailsTest {
     }
 
     @Test
-    void testJobDetailsWithoutParameters() {
+    void jobDetailsWithoutParameters() {
         JobDetails jobDetails = jobDetails()
                 .withClassName(TestService.class)
                 .withMethodName("doWork")
@@ -56,7 +56,7 @@ class JobDetailsTest {
     }
 
     @Test
-    void testJobDetailsFromJobRequest() {
+    void jobDetailsFromJobRequest() {
         final TestJobRequest jobRequest = new TestJobRequest("some input");
         JobDetails jobDetails = new JobDetails(jobRequest);
 

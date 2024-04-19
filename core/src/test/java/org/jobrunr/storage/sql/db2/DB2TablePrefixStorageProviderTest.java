@@ -35,7 +35,7 @@ class DB2TablePrefixStorageProviderTest extends AbstractDB2StorageProviderTest {
     }
 
     @AfterAll
-    public static void destroyDatasource() {
+    static void destroyDatasource() {
         dataSource.close();
         dataSource = null;
     }

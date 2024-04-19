@@ -94,7 +94,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallingSystemOutPrintln() {
+    void jobLambdaCallingSystemOutPrintln() {
         JobLambda job = () -> System.out.println("This is a test!");
         JobDetails jobDetails = toJobDetails(job);
         assertThat(jobDetails)
@@ -105,7 +105,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallingInlineSystemOutPrintln() {
+    void jobLambdaCallingInlineSystemOutPrintln() {
         JobDetails jobDetails = toJobDetails((JobLambda) () -> System.out.println("This is a test!"));
         assertThat(jobDetails)
                 .hasClass(System.class)
@@ -115,7 +115,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaContainingTwoStaticJobsShouldFailWithNiceException() {
+    void jobLambdaContainingTwoStaticJobsShouldFailWithNiceException() {
         final JobLambda jobLambda = () -> {
             System.out.println("This is a test!");
             System.out.println("This is a test!");
@@ -126,7 +126,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaContainingTwoJobsShouldFailWithNiceException() {
+    void jobLambdaContainingTwoJobsShouldFailWithNiceException() {
         final JobLambda jobLambda = () -> {
             testService.doWork();
             testService.doWork();
@@ -137,7 +137,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallingStaticMethod() {
+    void jobLambdaCallingStaticMethod() {
         UUID id = UUID.randomUUID();
         JobLambda job = () -> TestService.doWorkInStaticMethod(id);
         JobDetails jobDetails = toJobDetails(job);
@@ -148,7 +148,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallingInlineStaticMethod() {
+    void jobLambdaCallingInlineStaticMethod() {
         UUID id = UUID.randomUUID();
         JobDetails jobDetails = toJobDetails(() -> TestService.doWorkInStaticMethod(id));
         assertThat(jobDetails)
@@ -158,7 +158,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallMethodReference() {
+    void jobLambdaCallMethodReference() {
         JobLambda job = testService::doWork;
         JobDetails jobDetails = toJobDetails(job);
         assertThat(jobDetails)
@@ -168,7 +168,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallInstanceMethod_Null() {
+    void jobLambdaCallInstanceMethodNull() {
         TestService.Work work = null;
         JobLambda job = () -> testService.doWork(work);
         assertThatThrownBy(() -> toJobDetails(job))
@@ -177,7 +177,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallInstanceMethod_OtherLambda() {
+    void jobLambdaCallInstanceMethodOtherLambda() {
         Supplier<Boolean> supplier = () -> {
             System.out.println("Dit is een test");
             return true;
@@ -193,7 +193,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallInstanceMethod_BIPUSH() {
+    void jobLambdaCallInstanceMethodBIPUSH() {
         JobLambda job = () -> testService.doWork(5);
         JobDetails jobDetails = toJobDetails(job);
         assertThat(jobDetails)
@@ -203,7 +203,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallInstanceMethod_SIPUSH() {
+    void jobLambdaCallInstanceMethodSIPUSH() {
         JobLambda job = () -> testService.doWorkThatTakesLong(500);
         JobDetails jobDetails = toJobDetails(job);
         assertThat(jobDetails)
@@ -213,7 +213,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallInstanceMethod_LCONST() {
+    void jobLambdaCallInstanceMethodLCONST() {
         JobLambda job = () -> testService.doWorkThatTakesLong(1L);
         JobDetails jobDetails = toJobDetails(job);
         assertThat(jobDetails)
@@ -223,7 +223,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testInlineJobLambdaCallInstanceMethod() {
+    void inlineJobLambdaCallInstanceMethod() {
         JobDetails jobDetails = toJobDetails((JobLambda) () -> testService.doWork());
         assertThat(jobDetails)
                 .hasClass(TestService.class)
@@ -232,7 +232,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithIntegerAndJobContext() {
+    void jobLambdaWithIntegerAndJobContext() {
         JobLambda job = () -> testService.doWork(3, JobContext.Null);
         JobDetails jobDetails = toJobDetails(job);
         assertThat(jobDetails)
@@ -242,7 +242,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithDouble() {
+    void jobLambdaWithDouble() {
         JobLambda job = () -> testService.doWork(3.3);
         JobDetails jobDetails = toJobDetails(job);
         assertThat(jobDetails)
@@ -252,7 +252,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithSum() {
+    void jobLambdaWithSum() {
         int a = 6;
         int b = 3;
         JobLambda job = () -> testService.doWork(a + b);
@@ -264,7 +264,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithSubtraction() {
+    void jobLambdaWithSubtraction() {
         int a = 6;
         int b = 3;
         JobLambda job = () -> testService.doWork(a - b);
@@ -276,7 +276,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithMultiplication() {
+    void jobLambdaWithMultiplication() {
         int a = 6;
         int b = 3;
         JobLambda job = () -> testService.doWork(a * b);
@@ -288,7 +288,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithDivision() {
+    void jobLambdaWithDivision() {
         int a = 6;
         int b = 3;
         JobLambda job = () -> testService.doWork(a / b);
@@ -300,7 +300,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithMultipleInts() {
+    void jobLambdaWithMultipleInts() {
         JobLambda job = () -> testService.doWork(3, 97693);
         JobDetails jobDetails = toJobDetails(job);
         assertThat(jobDetails)
@@ -310,7 +310,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithMultipleParameters() {
+    void jobLambdaWithMultipleParameters() {
         for (int i = 0; i < 3; i++) {
             int finalI = i;
             Instant now = Instant.now();
@@ -325,7 +325,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithObject() {
+    void jobLambdaWithObject() {
         for (int i = 0; i < 3; i++) {
             int finalI = i;
             JobLambda job = () -> testService.doWork(new TestService.Work(finalI, "a String", UUID.randomUUID()));
@@ -343,7 +343,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithFile() {
+    void jobLambdaWithFile() {
         JobLambda job = () -> testService.doWorkWithFile(new File("/tmp/file.txt"));
 
         JobDetails jobDetails = toJobDetails(job);
@@ -356,7 +356,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithPath() {
+    void jobLambdaWithPath() {
         Path path = Paths.get("/tmp/file.txt");
         JobLambda job = () -> testService.doWorkWithPath(path);
 
@@ -370,7 +370,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithPathsGetInLambda() {
+    void jobLambdaWithPathsGetInLambda() {
         JobLambda job = () -> testService.doWorkWithPath(Paths.get("/tmp/file.txt"));
 
         JobDetails jobDetails = toJobDetails(job);
@@ -383,7 +383,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithPaths() {
+    void jobLambdaWithPaths() {
         for (int i = 0; i < 3; i++) {
             final Path path = Paths.get("/tmp/file" + i + ".txt");
             JobLambda job = () -> testService.doWorkWithPath(path);
@@ -399,7 +399,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithPathsGetMultiplePartsInLambda() {
+    void jobLambdaWithPathsGetMultiplePartsInLambda() {
         JobLambda job = () -> testService.doWorkWithPath(Paths.get("/tmp", "folder", "subfolder", "file.txt"));
 
         JobDetails jobDetails = toJobDetails(job);
@@ -412,7 +412,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithPathOfInLambda() {
+    void jobLambdaWithPathOfInLambda() {
         JobLambda job = () -> testService.doWorkWithPath(Paths.get("/tmp/file.txt"));
 
         JobDetails jobDetails = toJobDetails(job);
@@ -425,7 +425,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithObjectCreatedOutsideOfLambda() {
+    void jobLambdaWithObjectCreatedOutsideOfLambda() {
         for (int i = 0; i < 3; i++) {
             TestService.Work work = new TestService.Work(i, "a String", UUID.randomUUID());
             JobLambda job = () -> testService.doWork(work);
@@ -443,7 +443,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithSupportedPrimitiveTypes() {
+    void jobLambdaWithSupportedPrimitiveTypes() {
         JobLambda job = () -> testService.doWork(true, 3, 5L, 3.3F, 2.3D);
         JobDetails jobDetails = toJobDetails(job);
         assertThat(jobDetails)
@@ -453,7 +453,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithUnsupportedPrimitiveTypes() {
+    void jobLambdaWithUnsupportedPrimitiveTypes() {
         JobLambda job = () -> testService.doWork((byte) 0x3, (short) 2, 'c');
         assertThatThrownBy(() -> toJobDetails(job))
                 .isInstanceOf(JobRunrException.class)
@@ -462,7 +462,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallingMultiLine() {
+    void jobLambdaCallingMultiLine() {
         final List<UUID> workStream = getWorkStream().collect(toList());
         Instant now = Instant.now();
         for (UUID id : workStream) {
@@ -479,7 +479,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallingMultiLineStatementSystemOutPrintln() {
+    void jobLambdaCallingMultiLineStatementSystemOutPrintln() {
         final List<UUID> workStream = getWorkStream().collect(toList());
         LocalDateTime now = LocalDateTime.now();
         for (UUID id : workStream) {
@@ -505,7 +505,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaCallingMultiLineStatementThatLoadsFromAService() {
+    void jobLambdaCallingMultiLineStatementThatLoadsFromAService() {
         JobLambda job = () -> {
             UUID testId = testService.getAnUUID();
             testService.doWork(testId);
@@ -519,13 +519,13 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithArgumentThatIsNotUsed() {
+    void jobLambdaWithArgumentThatIsNotUsed() {
         final Stream<Integer> range = IntStream.range(0, 1).boxed();
         assertThatCode(() -> jobDetailsGenerator.toJobDetails(range, (i) -> testService.doWork())).doesNotThrowAnyException();
     }
 
     @Test
-    void testJobLambdaWithStaticMethodInLambda() {
+    void jobLambdaWithStaticMethodInLambda() {
         JobLambda jobLambda = () -> testService.doWork(TestService.Work.from(2, "a String", UUID.randomUUID()));
         final JobDetails jobDetails = toJobDetails(jobLambda);
 
@@ -540,7 +540,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWhichReturnsSomething() {
+    void jobLambdaWhichReturnsSomething() {
         JobLambda jobLambda = () -> testService.doWorkAndReturnResult("someString");
         JobDetails jobDetails = toJobDetails(jobLambda);
         assertThat(jobDetails)
@@ -550,7 +550,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testSimpleJobLambdaWithStream() {
+    void simpleJobLambdaWithStream() {
         List<UUID> workStream = getWorkStream().collect(toList());
         final JobLambdaFromStream<UUID> lambda = (uuid) -> testService.doWork(uuid, 3, now());
         final List<JobDetails> allJobDetails = workStream.stream()
@@ -564,7 +564,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithStream() {
+    void jobLambdaWithStream() {
         Stream<UUID> workStream = getWorkStream();
         AtomicInteger atomicInteger = new AtomicInteger();
         final JobLambdaFromStream<UUID> lambda = (uuid) -> testService.doWork(uuid.toString(), atomicInteger.incrementAndGet(), now());
@@ -579,7 +579,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithStreamAndObject() {
+    void jobLambdaWithStreamAndObject() {
         List<UUID> workStream = getWorkStream().collect(toUnmodifiableList());
         AtomicInteger atomicInteger = new AtomicInteger();
         final JobLambdaFromStream<TestService.Work> lambda = (work) -> testService.doWork(work);
@@ -601,7 +601,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithStreamAndMethodReference() {
+    void jobLambdaWithStreamAndMethodReference() {
         final UUID uuid = UUID.randomUUID();
         final JobDetails jobDetails = jobDetailsGenerator.toJobDetails(uuid, TestService::doWorkWithUUID);
         assertThat(jobDetails)
@@ -611,7 +611,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testJobLambdaWithStreamAndMethodReferenceInSameFile() {
+    void jobLambdaWithStreamAndMethodReferenceInSameFile() {
         final UUID uuid = UUID.randomUUID();
         final JobDetails jobDetails = jobDetailsGenerator.toJobDetails(uuid, AbstractJobDetailsGeneratorTest::doWorkWithUUID);
         assertThat(jobDetails)
@@ -621,7 +621,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambda() {
+    void iocJobLambda() {
         IocJobLambda<TestService> iocJobLambda = (x) -> x.doWork();
         JobDetails jobDetails = toJobDetails(iocJobLambda);
         assertThat(jobDetails)
@@ -631,7 +631,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testInlineIocJobLambda() {
+    void inlineIocJobLambda() {
         JobDetails jobDetails = jobDetailsGenerator.toJobDetails((IocJobLambda<TestService>) (x) -> x.doWork(5));
         assertThat(jobDetails)
                 .hasClass(TestService.class)
@@ -640,7 +640,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithIntegerAndJobContext() {
+    void iocJobLambdaWithIntegerAndJobContext() {
         IocJobLambda<TestService> iocJobLambda = (x) -> x.doWork(3, JobContext.Null);
         JobDetails jobDetails = toJobDetails(iocJobLambda);
         assertThat(jobDetails)
@@ -650,7 +650,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithDouble() {
+    void iocJobLambdaWithDouble() {
         IocJobLambda<TestService> iocJobLambda = (x) -> x.doWork(3.3);
         JobDetails jobDetails = toJobDetails(iocJobLambda);
         assertThat(jobDetails)
@@ -660,7 +660,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithMultipleInts() {
+    void iocJobLambdaWithMultipleInts() {
         IocJobLambda<TestService> iocJobLambda = (x) -> x.doWork(3, 97693);
         JobDetails jobDetails = toJobDetails(iocJobLambda);
         assertThat(jobDetails)
@@ -670,7 +670,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithMultipleParameters() {
+    void iocJobLambdaWithMultipleParameters() {
         for (int i = 0; i < 3; i++) {
             int finalI = i;
             Instant now = Instant.now();
@@ -685,7 +685,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithObject() {
+    void iocJobLambdaWithObject() {
         for (int i = 0; i < 3; i++) {
             int finalI = i;
             IocJobLambda<TestService> iocJobLambda = (x) -> x.doWork(new TestService.Work(finalI, "a String", UUID.randomUUID()));
@@ -703,7 +703,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIoCJobLambdaWithFile() {
+    void ioCJobLambdaWithFile() {
         IocJobLambda<TestService> iocJobLambda = (x) -> x.doWorkWithFile(new File("/tmp/file.txt"));
 
         JobDetails jobDetails = toJobDetails(iocJobLambda);
@@ -716,7 +716,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIoCJobLambdaWithPath() {
+    void ioCJobLambdaWithPath() {
         Path path = Paths.get("/tmp/file.txt");
         IocJobLambda<TestService> iocJobLambda = (x) -> x.doWorkWithPath(path);
 
@@ -730,7 +730,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithObjectCreatedOutsideOfLambda() {
+    void iocJobLambdaWithObjectCreatedOutsideOfLambda() {
         for (int i = 0; i < 3; i++) {
             TestService.Work work = new TestService.Work(i, "a String", UUID.randomUUID());
             IocJobLambda<TestService> iocJobLambda = (x) -> x.doWork(work);
@@ -748,7 +748,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithSupportedPrimitiveTypes() {
+    void iocJobLambdaWithSupportedPrimitiveTypes() {
         IocJobLambda<TestService> iocJobLambda = (x) -> x.doWork(true, 3, 5L, 3.3F, 2.3D);
         JobDetails jobDetails = toJobDetails(iocJobLambda);
         assertThat(jobDetails)
@@ -758,7 +758,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithSupportedPrimitiveTypes_LOAD() {
+    void iocJobLambdaWithSupportedPrimitiveTypesLOAD() {
         for (int i = 0; i < 3; i++) {
             final boolean finalB = i % 2 == 0;
             final int finalI = i;
@@ -776,7 +776,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/158")
-    void testIocJobLambdaWithPrimitiveWrappers_LOAD() {
+    void iocJobLambdaWithPrimitiveWrappersLOAD() {
         for (int i = 0; i < 3; i++) {
             final Boolean finalB = i % 2 == 0;
             final Integer finalI = i;
@@ -794,7 +794,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/165")
-    void testJobLambdaWithPrimitiveParametersAndWrappersInMethod_LOAD() {
+    void jobLambdaWithPrimitiveParametersAndWrappersInMethodLOAD() {
         long id = 1L;
         long env = 2L;
         String param = "test";
@@ -808,7 +808,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/165")
-    void testIoCJobLambdaWithPrimitiveParametersAndWrappersInMethod_LOAD() {
+    void ioCJobLambdaWithPrimitiveParametersAndWrappersInMethodLOAD() {
         long id = 1L;
         long env = 2L;
         String param = "test";
@@ -823,7 +823,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/165")
-    void testJobLambdaWithPrimitiveParametersAndPrimitivesInMethod_LOAD() {
+    void jobLambdaWithPrimitiveParametersAndPrimitivesInMethodLOAD() {
         long id = 1L;
         long env = 2L;
         String param = "test";
@@ -837,7 +837,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/165")
-    void testIoCJobLambdaWithPrimitiveParametersAndPrimitivesInMethod_LOAD() {
+    void ioCJobLambdaWithPrimitiveParametersAndPrimitivesInMethodLOAD() {
         long id = 1L;
         long env = 2L;
         String param = "test";
@@ -852,7 +852,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/165")
-    void testJobLambdaWithCombinationParametersAndPrimitivesInMethod_LOAD() {
+    void jobLambdaWithCombinationParametersAndPrimitivesInMethodLOAD() {
         long id = 1L;
         Long env = 2L;
         String param = "test";
@@ -866,7 +866,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/165")
-    void testIoCJobLambdaWithCombinationParametersAndPrimitivesInMethod_LOAD() {
+    void ioCJobLambdaWithCombinationParametersAndPrimitivesInMethodLOAD() {
         long id = 1L;
         Long env = 2L;
         String param = "test";
@@ -882,7 +882,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/165")
-    void testJobLambdaWithCombinationParametersAndWrappersInMethod_LOAD() {
+    void jobLambdaWithCombinationParametersAndWrappersInMethodLOAD() {
         long id = 1L;
         Long env = 2L;
         String param = "test";
@@ -896,7 +896,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/165")
-    void testIoCJobLambdaWithCombinationParametersAndWrappersInMethod_LOAD() {
+    void ioCJobLambdaWithCombinationParametersAndWrappersInMethodLOAD() {
         long id = 1L;
         Long env = 2L;
         String param = "test";
@@ -910,7 +910,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithUnsupportedPrimitiveTypes() {
+    void iocJobLambdaWithUnsupportedPrimitiveTypes() {
         IocJobLambda<TestService> iocJobLambda = (x) -> x.doWork((byte) 0x3, (short) 2, 'c');
         assertThatThrownBy(() -> toJobDetails(iocJobLambda))
                 .isInstanceOf(JobRunrException.class)
@@ -919,13 +919,13 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIocJobLambdaWithArgumentThatIsNotUsed() {
+    void iocJobLambdaWithArgumentThatIsNotUsed() {
         IocJobLambdaFromStream<TestService, Integer> iocJobLambdaFromStream = (x, i) -> x.doWork();
         assertThatCode(() -> jobDetailsGenerator.toJobDetails(5, iocJobLambdaFromStream)).doesNotThrowAnyException();
     }
 
     @Test
-    void testIocJobLambdaWhichReturnsSomething() {
+    void iocJobLambdaWhichReturnsSomething() {
         IocJobLambda<TestService> iocJobLambda = (x) -> x.doWorkAndReturnResult("someString");
         JobDetails jobDetails = toJobDetails(iocJobLambda);
         assertThat(jobDetails)
@@ -935,7 +935,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testSimpleIoCJobLambdaWithStream() {
+    void simpleIoCJobLambdaWithStream() {
         List<UUID> workStream = getWorkStream().collect(toList());
         final IocJobLambdaFromStream<TestService, UUID> lambda = (service, uuid) -> service.doWork(uuid, 5, now());
         final List<JobDetails> allJobDetails = workStream.stream()
@@ -949,7 +949,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIoCJobLambdaWithStream() {
+    void ioCJobLambdaWithStream() {
         Stream<UUID> workStream = getWorkStream();
         AtomicInteger atomicInteger = new AtomicInteger();
         final IocJobLambdaFromStream<TestService, UUID> lambda = (service, uuid) -> service.doWork(uuid.toString(), atomicInteger.incrementAndGet(), now());
@@ -964,7 +964,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIoCJobWithStreamAndObject() {
+    void ioCJobWithStreamAndObject() {
         List<UUID> workStream = getWorkStream().collect(toUnmodifiableList());
         AtomicInteger atomicInteger = new AtomicInteger();
         final IocJobLambdaFromStream<TestService, TestService.Work> lambda = (service, work) -> service.doWork(work);
@@ -986,7 +986,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testIoCJobLambdaWithStaticMethodInLambda() {
+    void ioCJobLambdaWithStaticMethodInLambda() {
         IocJobLambda<TestService> jobLambda = x -> x.doWork(TestService.Work.from(2, "a String", UUID.randomUUID()));
         final JobDetails jobDetails = toJobDetails(jobLambda);
 
@@ -1001,7 +1001,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testInlineJobLambdaFromInterface() {
+    void inlineJobLambdaFromInterface() {
         JobDetails jobDetails = toJobDetails((JobLambda) () -> testServiceInterface.doWork());
         assertThat(jobDetails)
                 .hasClass(TestService.class)
@@ -1010,7 +1010,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testMethodReferenceJobLambdaFromInterface() {
+    void methodReferenceJobLambdaFromInterface() {
         JobDetails jobDetails = toJobDetails((JobLambda) testServiceInterface::doWork);
         assertThat(jobDetails)
                 .hasClass(TestServiceInterface.class)
@@ -1020,7 +1020,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/375")
-    void testJobLambdaWithEnum() {
+    void jobLambdaWithEnum() {
         JobDetails jobDetails = toJobDetails(() -> testService.doWorkWithEnum(PROGRAMMING));
         assertThat(jobDetails)
                 .hasClass(TestService.class)
@@ -1030,7 +1030,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/335")
-    void testJobLambdaWithDifferentParametersCalledFromOtherMethod() {
+    void jobLambdaWithDifferentParametersCalledFromOtherMethod() {
         UUID uuid1 = UUID.randomUUID();
         assertThat(createJobDetails(uuid1))
                 .hasClass(TestService.GithubIssue335.class)
@@ -1085,7 +1085,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://stackoverflow.com/questions/74161840/enqueue-jobrunr-background-job-with-lambda-subclass-of-abstract-class")
-    void testWithSubClass() {
+    void withSubClass() {
         TaskEvent taskEvent = new TaskEvent();
         taskEvent.tasks.add(new TaskEvent.Task1());
         taskEvent.tasks.add(new TaskEvent.Task2());
@@ -1096,7 +1096,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/694")
-    void testCachingOfPrimitiveIntValues() {
+    void cachingOfPrimitiveIntValues() {
         JobDetails jobDetails1 = createJobLambdaWithPrimitiveInt(1);
         assertThat(jobDetails1)
                 .hasMethodName("runItInt")
@@ -1110,7 +1110,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/694")
-    void testCastingOfPrimitiveIntValues() {
+    void castingOfPrimitiveIntValues() {
         JobDetails jobDetails = createJobLambdaWithPrimitiveIntCastedToPrimitiveLong(3);
         assertThat(jobDetails)
                 .hasMethodName("runItLong")
@@ -1119,7 +1119,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
 
     @Test
     @Because("https://github.com/jobrunr/jobrunr/issues/694")
-    void testPassingObject() {
+    void passingObject() {
         TestService.Work work1 = new TestService.Work(2, "a", UUID.randomUUID());
         JobDetails jobDetails1 = createJobLambdaWithObject(work1);
         assertThat(jobDetails1)
@@ -1134,7 +1134,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testStreamWithMethodInvocationInLambda() {
+    void streamWithMethodInvocationInLambda() {
         UUID id1 = UUID.randomUUID();
         UUID id2 = UUID.randomUUID();
 
@@ -1148,7 +1148,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testCreateJobWithProxyClassImplementingInterfaceRespectsInterface() {
+    void createJobWithProxyClassImplementingInterfaceRespectsInterface() {
         TestServiceInterface testServiceProxy = (TestServiceInterface) Proxy.newProxyInstance(TestServiceInterface.class.getClassLoader(), new Class[]{TestServiceInterface.class}, new DummyProxyInvocationHandler());
         JobDetails jobDetails = toJobDetails(() -> testServiceProxy.doWork());
 
@@ -1159,7 +1159,7 @@ public abstract class AbstractJobDetailsGeneratorTest {
     }
 
     @Test
-    void testCreateJobWithSyntheticClassImplementingInterfaceRespectsInterface() {
+    void createJobWithSyntheticClassImplementingInterfaceRespectsInterface() {
         TestServiceInterface testService = () -> System.out.println("A Java 8 lambda is a synthetic class...");
         assertThat(testService.getClass()).matches(Class::isSynthetic);
 

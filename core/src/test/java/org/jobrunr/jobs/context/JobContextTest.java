@@ -15,7 +15,7 @@ import static org.jobrunr.JobRunrAssertions.assertThat;
 import static org.jobrunr.jobs.JobTestBuilder.aJobInProgress;
 import static org.jobrunr.utils.SleepUtils.sleep;
 
-public class JobContextTest {
+class JobContextTest {
 
     @Test
     void jobContextCanAccessJobInfo() {

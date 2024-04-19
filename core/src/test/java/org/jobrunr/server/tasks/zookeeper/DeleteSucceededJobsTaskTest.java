@@ -34,7 +34,7 @@ class DeleteSucceededJobsTaskTest extends AbstractTaskTest {
     }
 
     @Test
-    void testTask() {
+    void task() {
         Job succeededJob1 = aSucceededJob().build();
         Job succeededJob2 = aSucceededJob().build();
         when(storageProvider.getJobList(eq(SUCCEEDED), any(), any())).thenReturn(asList(succeededJob1, succeededJob2), emptyJobList());

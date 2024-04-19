@@ -8,7 +8,7 @@ import static org.jobrunr.jobs.JobTestBuilder.aScheduledJob;
 class JobVersionerTest {
 
     @Test
-    void testJobVersionerOnCommitVersionIsIncreased() {
+    void jobVersionerOnCommitVersionIsIncreased() {
         // GIVEN
         Job job = aScheduledJob().withVersion(5).build();
 
@@ -26,7 +26,7 @@ class JobVersionerTest {
     }
 
     @Test
-    void testJobVersionerOnRollbackVersionIsRestored() {
+    void jobVersionerOnRollbackVersionIsRestored() {
         // GIVEN
         Job job = aScheduledJob().withVersion(5).build();
 
@@ -44,7 +44,7 @@ class JobVersionerTest {
     }
 
     @Test
-    void testJobVersionerInTryWithResourcesOnRollbackVersionIsRestored() {
+    void jobVersionerInTryWithResourcesOnRollbackVersionIsRestored() {
         Job job = aScheduledJob().withVersion(5).build();
         try (JobVersioner jobVersioner = new JobVersioner(job)) {
             // nothing to do as not committed

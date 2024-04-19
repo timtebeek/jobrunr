@@ -11,12 +11,12 @@ import org.springframework.cglib.proxy.MethodInterceptor;
 import static java.util.Collections.emptyList;
 import static org.jobrunr.JobRunrAssertions.assertThat;
 
-public class CGLibJobDetailsPostProcessorTest {
+class CGLibJobDetailsPostProcessorTest {
 
     private CGLibPostProcessor cgLibPostProcessor = new CGLibPostProcessor();
 
     @Test
-    void testCGLibName() {
+    void cGLibName() {
         TestService proxy = getTestServiceAsCGLibProxy();
 
         JobDetails jobDetails = new JobDetails(proxy.getClass().getName(), null, "doWork", emptyList());

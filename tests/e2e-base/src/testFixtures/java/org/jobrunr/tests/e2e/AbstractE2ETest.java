@@ -42,7 +42,7 @@ public abstract class AbstractE2ETest {
     }
 
     @Test
-    void testProcessInBackgroundJobServer() {
+    void processInBackgroundJobServer() {
         TestService testService = new TestService();
         final JobId jobId = BackgroundJob.enqueue(() -> testService.doWork());
         try {

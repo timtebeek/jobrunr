@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import static org.jobrunr.JobRunrAssertions.assertThat;
 import static org.jobrunr.utils.resilience.RateLimiter.Builder.rateLimit;
 
-public class NativePoolH2TablePrefixStorageProviderTest extends SqlStorageProviderTest {
+class NativePoolH2TablePrefixStorageProviderTest extends SqlStorageProviderTest {
 
     private static JdbcConnectionPool dataSource;
 
@@ -55,7 +55,7 @@ public class NativePoolH2TablePrefixStorageProviderTest extends SqlStorageProvid
     }
 
     @AfterAll
-    public static void destroyDatasource() throws SQLException {
+    static void destroyDatasource() throws SQLException {
         dataSource.dispose();
         dataSource = null;
     }

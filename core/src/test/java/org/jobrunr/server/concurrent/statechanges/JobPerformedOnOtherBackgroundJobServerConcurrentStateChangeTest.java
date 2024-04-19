@@ -37,7 +37,7 @@ class JobPerformedOnOtherBackgroundJobServerConcurrentStateChangeTest {
     JobPerformedOnOtherBackgroundJobServerConcurrentStateChange allowedStateChange;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         allowedStateChange = new JobPerformedOnOtherBackgroundJobServerConcurrentStateChange(jobSteward);
         lenient().when(jobSteward.getThreadProcessingJob(any())).thenReturn(threadProcessingLocalJob);
     }

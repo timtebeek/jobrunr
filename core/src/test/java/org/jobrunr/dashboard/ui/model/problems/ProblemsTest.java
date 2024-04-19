@@ -11,7 +11,7 @@ class ProblemsTest {
     Problems problems = new Problems();
 
     @Test
-    void testAddProblem() {
+    void addProblem() {
         problems.addProblem(new CpuAllocationIrregularityProblem(new ArrayList<>()));
         problems.addProblem(new CpuAllocationIrregularityProblem(new ArrayList<>()));
 
@@ -19,7 +19,7 @@ class ProblemsTest {
     }
 
     @Test
-    void testRemoveProblemsOfType() {
+    void removeProblemsOfType() {
         problems.addProblem(new CpuAllocationIrregularityProblem(new ArrayList<>()));
         assertThat(problems).hasSize(1);
 
@@ -29,7 +29,7 @@ class ProblemsTest {
     }
 
     @Test
-    void testContainsProblemOfType() {
+    void containsProblemOfType() {
         problems.addProblem(new CpuAllocationIrregularityProblem(new ArrayList<>()));
 
         assertThat(problems.containsProblemOfType(CpuAllocationIrregularityProblem.PROBLEM_TYPE)).isTrue();

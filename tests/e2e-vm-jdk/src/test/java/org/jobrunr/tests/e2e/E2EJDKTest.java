@@ -39,7 +39,7 @@ class E2EJDKTest {
     private static final InMemoryStorageProvider storageProvider = new InMemoryStorageProvider();
 
     @BeforeAll
-    public static void startJobRunr() {
+    static void startJobRunr() {
         JobRunr
                 .configure()
                 .useStorageProvider(storageProvider)
@@ -50,7 +50,7 @@ class E2EJDKTest {
     }
 
     @AfterEach
-    public void clearStorageProviderExceptBackgroundJobServers() {
+    void clearStorageProviderExceptBackgroundJobServers() {
         // we cannot use whitebox as it is compiled with Java > 8 and some tests will fail
         ((Map) getValueFromFieldOrProperty(storageProvider, "jobQueue")).clear();
         ((List) getValueFromFieldOrProperty(storageProvider, "recurringJobs")).clear();
@@ -58,13 +58,13 @@ class E2EJDKTest {
     }
 
     @AfterAll
-    public static void stopJobRunr() {
+    static void stopJobRunr() {
         JobRunr
                 .destroy();
     }
 
     @Test
-    void testExpectedJavaClassMajorVersion() throws IOException {
+    void expectedJavaClassMajorVersion() throws IOException {
         String expectedJavaClassVersion = System.getenv("JAVA_CLASS_VERSION");
         if(isNullOrEmpty(expectedJavaClassVersion)) throw new IllegalStateException("The environment variable 'JAVA_CLASS_VERSION' is missing");
 

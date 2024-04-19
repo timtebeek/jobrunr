@@ -61,6 +61,7 @@ dependencies {
     testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
     testImplementation 'com.google.code.gson:gson'
     testImplementation 'org.eclipse:yasson'
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.10.2"
     testImplementation 'io.micrometer:micrometer-core'
     testImplementation 'org.testcontainers:testcontainers'
     testImplementation 'org.testcontainers:junit-jupiter'
@@ -231,4 +232,7 @@ signing {
         useInMemoryPgpKeys(new String(Base64.decoder.decode(base64Key)), System.getenv('SIGNING_PASSWORD'))
         sign publishing.publications.mavenJava
     }
+}
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }

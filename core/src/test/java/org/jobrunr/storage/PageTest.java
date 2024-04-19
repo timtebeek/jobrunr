@@ -11,7 +11,7 @@ import static org.jobrunr.storage.StorageProviderUtils.Jobs.FIELD_CREATED_AT;
 class PageTest {
 
     @Test
-    void testPaging1() {
+    void paging1() {
         Page<String> page = new Page<>(50, new ArrayList<>(), 15, 3,
                 new OffsetBasedPageRequest(FIELD_CREATED_AT + ":ASC", 15, 5),
                 new OffsetBasedPageRequest(FIELD_CREATED_AT + ":ASC", 10, 5),
@@ -26,7 +26,7 @@ class PageTest {
     }
 
     @Test
-    void testPaging2() {
+    void paging2() {
         Page<String> page = new Page<>(5, new ArrayList<>(), 2, 1,
                 new OffsetBasedPageRequest(FIELD_CREATED_AT + ":ASC", 2, 2),
                 new OffsetBasedPageRequest(FIELD_CREATED_AT + ":ASC", 0, 2),
@@ -41,7 +41,7 @@ class PageTest {
     }
 
     @Test
-    void testPaging3() {
+    void paging3() {
         Page<String> page = new Page<>(5, new ArrayList<>(), 0, 0,
                 new OffsetBasedPageRequest(FIELD_CREATED_AT + ":ASC", 0, 20),
                 null,
@@ -56,7 +56,7 @@ class PageTest {
     }
 
     @Test
-    void testPagingStrangeValues1() {
+    void pagingStrangeValues1() {
         Page<String> page = new Page<>(5, new ArrayList<>(), 1, 1,
                 new OffsetBasedPageRequest(FIELD_CREATED_AT + ":ASC", 1, 4),
                 new OffsetBasedPageRequest(FIELD_CREATED_AT + ":ASC", 0, 4),
@@ -72,7 +72,7 @@ class PageTest {
     }
 
     @Test
-    void testPagingStrangeValues2() {
+    void pagingStrangeValues2() {
         Page<String> page = new Page<>(5, new ArrayList<>(), 1, 1,
                 new OffsetBasedPageRequest(FIELD_CREATED_AT + ":ASC", 1, 3),
                 new OffsetBasedPageRequest(FIELD_CREATED_AT + ":ASC", 0, 3),

@@ -37,7 +37,7 @@ class AgroalH2StorageProviderTest extends SqlStorageProviderTest {
     }
 
     @AfterAll
-    public static void destroyDatasource() throws SQLException {
+    static void destroyDatasource() throws SQLException {
         dataSource.close();
         dataSource = null;
     }

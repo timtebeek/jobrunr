@@ -58,14 +58,14 @@ class CollectionUtilsTest {
     }
 
     @Test
-    void testMapOf1() {
+    void mapOf1() {
         final Map<String, String> map = mapOf("key1", "value1");
 
         assertThat(map).containsEntry("key1", "value1");
     }
 
     @Test
-    void testMapOf2() {
+    void mapOf2() {
         final Map<String, String> map = mapOf(
                 "key1", "value1",
                 "key2", "value2"

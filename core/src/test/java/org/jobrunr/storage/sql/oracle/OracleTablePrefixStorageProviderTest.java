@@ -26,7 +26,7 @@ import static org.jobrunr.utils.resilience.RateLimiter.Builder.rateLimit;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @RunTestBetween(from = "00:00", to = "03:00")
 @RunTestIfDockerImageExists("container-registry.oracle.com/database/standard:12.1.0.2")
-public class OracleTablePrefixStorageProviderTest extends AbstractOracleStorageProviderTest {
+class OracleTablePrefixStorageProviderTest extends AbstractOracleStorageProviderTest {
 
     private static HikariDataSource dataSource;
 
@@ -46,7 +46,7 @@ public class OracleTablePrefixStorageProviderTest extends AbstractOracleStorageP
     }
 
     @AfterAll
-    public static void destroyDatasource() {
+    static void destroyDatasource() {
         dataSource.close();
         dataSource = null;
     }

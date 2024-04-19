@@ -19,7 +19,7 @@ class DeleteDeletedJobsPermanentlyTaskTest extends AbstractTaskTest {
     }
 
     @Test
-    void testTask() {
+    void task() {
         runTask(task);
 
         verify(storageProvider).deleteJobsPermanently(eq(DELETED), any());

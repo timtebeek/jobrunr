@@ -31,7 +31,7 @@ class OnboardNewWorkTaskTest extends AbstractTaskTest {
     }
 
     @Test
-    void testTask() {
+    void task() {
         Job enqueuedJob1 = anEnqueuedJob().build();
         Job enqueuedJob2 = anEnqueuedJob().build();
         when(storageProvider.getJobsToProcess(eq(backgroundJobServer), any())).thenReturn(asList(enqueuedJob1, enqueuedJob2), emptyJobList());
@@ -42,7 +42,7 @@ class OnboardNewWorkTaskTest extends AbstractTaskTest {
     }
 
     @Test
-    void testTaskCanHappenAgainAfterException() {
+    void taskCanHappenAgainAfterException() {
         Job enqueuedJob1 = anEnqueuedJob().build();
         Job enqueuedJob2 = anEnqueuedJob().build();
         when(storageProvider.getJobsToProcess(eq(backgroundJobServer), any()))

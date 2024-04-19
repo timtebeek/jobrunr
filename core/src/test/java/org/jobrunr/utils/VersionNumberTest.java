@@ -9,7 +9,7 @@ import static org.jobrunr.utils.VersionNumber.v;
 class VersionNumberTest {
 
     @Test
-    void testVersionNumberConstructor() {
+    void versionNumberConstructor() {
         assertThatCode(() -> v("5.0.0")).doesNotThrowAnyException();
         assertThatCode(() -> v("7.0.0-alpha.1")).doesNotThrowAnyException();
         assertThatCode(() -> v("23.ea.3")).doesNotThrowAnyException();
@@ -18,7 +18,7 @@ class VersionNumberTest {
     }
 
     @Test
-    void testMethods() {
+    void methods() {
         VersionNumber v = v("1.2.3-alpha.6");
         assertThat(v.getMajorVersion()).isEqualTo("1");
         assertThat(v.getMinorVersion()).isEqualTo("2");
@@ -26,7 +26,7 @@ class VersionNumberTest {
     }
 
     @Test
-    void testIsOlderOrEqualTo() {
+    void isOlderOrEqualTo() {
         assertThat(v("6.0.0").isOlderOrEqualTo(v("6.0.0"))).isTrue();
         assertThat(v("5.0.0").isOlderOrEqualTo(v("6.0.0"))).isTrue();
         assertThat(v("9.0.0").isOlderOrEqualTo(v("10.0.0"))).isTrue();
@@ -43,7 +43,7 @@ class VersionNumberTest {
     }
 
     @Test
-    void testIsOlderThan() {
+    void isOlderThan() {
         assertThat(v("5.0.0").isOlderThan(v("6.0.0"))).isTrue();
         assertThat(v("9.0.0").isOlderThan(v("10.0.0"))).isTrue();
         assertThat(v("1.0.0").isOlderThan(v("10.0.0"))).isTrue();
@@ -60,7 +60,7 @@ class VersionNumberTest {
     }
 
     @Test
-    void testIsNewerOrEqualTo() {
+    void isNewerOrEqualTo() {
         assertThat(v("6.0.0").isNewerOrEqualTo(v("6.0.0"))).isTrue();
         assertThat(v("6.0.0").isNewerOrEqualTo(v("5.0.0"))).isTrue();
         assertThat(v("10.0.0").isNewerOrEqualTo(v("9.0.0"))).isTrue();

@@ -46,7 +46,7 @@ class BackgroundJobServerUsesBackJobPerformerFactoryTest {
     }
 
     @Test
-    void testProcessJobUsesBackgroundJobPerformerFactoryWithMaximumPriorityWhenAvailable() {
+    void processJobUsesBackgroundJobPerformerFactoryWithMaximumPriorityWhenAvailable() {
         try (MockedStatic<ServiceLoader> serviceLoaderMock = Mockito.mockStatic(ServiceLoader.class)) {
             // GIVEN
             BackgroundJobPerformer minPriorityBackgroundJobPerformer = mock(BackgroundJobPerformer.class);
@@ -82,7 +82,7 @@ class BackgroundJobServerUsesBackJobPerformerFactoryTest {
     }
 
     @Test
-    void testProcessJobUsesDefaultBackgroundJobPerformerFactoryWhenNoneAvailable() {
+    void processJobUsesDefaultBackgroundJobPerformerFactoryWhenNoneAvailable() {
         try (MockedStatic<ServiceLoader> serviceLoaderMock = Mockito.mockStatic(ServiceLoader.class)) {
             // GIVEN
             ServiceLoader<BackgroundJobPerformerFactory> backgroundJobPerformerFactoryServiceLoader = mock(ServiceLoader.class);

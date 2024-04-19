@@ -20,7 +20,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.internal.util.reflection.Whitebox.setInternalState;
 
 @Testcontainers
-public class JedisRedisStorageProviderTest extends StorageProviderTest {
+class JedisRedisStorageProviderTest extends StorageProviderTest {
 
     @Container
     private static final GenericContainer redisContainer = new GenericContainer("redis").withExposedPorts(6379);
@@ -47,7 +47,7 @@ public class JedisRedisStorageProviderTest extends StorageProviderTest {
     }
 
     @AfterAll
-    public static void shutdownJedisPool() {
+    static void shutdownJedisPool() {
         getJedisPool().close();
     }
 

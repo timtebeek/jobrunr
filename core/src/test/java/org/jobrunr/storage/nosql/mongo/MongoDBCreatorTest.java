@@ -42,7 +42,7 @@ class MongoDBCreatorTest {
     }
 
     @Test
-    void testMigrationsHappyPath() {
+    void migrationsHappyPath() {
         MongoDBCreator mongoDBCreator = new MongoDBCreator(mongoClient(), MongoDBStorageProvider.DEFAULT_DB_NAME);
 
         assertThat(mongoDBCreator.isNewMigration(new NoSqlMigrationByClass(M001_CreateJobCollection.class))).isTrue();
@@ -56,7 +56,7 @@ class MongoDBCreatorTest {
     }
 
     @Test
-    void testValidateCollectionsNoCollectionPrefix() {
+    void validateCollectionsNoCollectionPrefix() {
         MongoDBCreator mongoDBCreator = new MongoDBCreator(mongoClient(), MongoDBStorageProvider.DEFAULT_DB_NAME);
         assertThatThrownBy(mongoDBCreator::validateCollections)
                 .isInstanceOf(JobRunrException.class)
@@ -69,7 +69,7 @@ class MongoDBCreatorTest {
     }
 
     @Test
-    void testValidateCollectionsWithCollectionPrefix() {
+    void validateCollectionsWithCollectionPrefix() {
         MongoDBCreator mongoDBCreator = new MongoDBCreator(mongoClient(), MongoDBStorageProvider.DEFAULT_DB_NAME, "MYCOLLECTIONPREFIX_");
         assertThatThrownBy(mongoDBCreator::validateCollections)
                 .isInstanceOf(JobRunrException.class)
@@ -82,7 +82,7 @@ class MongoDBCreatorTest {
     }
 
     @Test
-    void testMigrationsConcurrent() {
+    void migrationsConcurrent() {
         MongoDBCreator mongoDBCreator = new MongoDBCreator(mongoClient(), MongoDBStorageProvider.DEFAULT_DB_NAME) {
             @Override
             protected boolean isNewMigration(NoSqlMigration noSqlMigration) {

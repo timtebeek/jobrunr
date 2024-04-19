@@ -31,7 +31,7 @@ class DeletedWhileAnyOtherConcurrentStateChangeTest {
     private JobSteward jobSteward;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         allowedStateChange = new DeletedWhileAnyOtherConcurrentStateChange(jobSteward);
     }
 

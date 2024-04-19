@@ -34,18 +34,18 @@ class LettuceRedisDBCreatorTest {
     private LettuceRedisDBCreator lettuceRedisDBCreator;
 
     @BeforeEach
-    public void setupDBCreator() {
+    void setupDBCreator() {
         redisConnectionPool = redisConnectionPool();
         lettuceRedisDBCreator = new LettuceRedisDBCreator(lettuceRedisStorageProviderMock, redisConnectionPool, "");
     }
 
     @AfterEach
-    public void teardownPool() {
+    void teardownPool() {
         redisConnectionPool.close();
     }
 
     @Test
-    void testMigrationsHappyPath() {
+    void migrationsHappyPath() {
         assertThat(lettuceRedisDBCreator.isNewMigration(new NoSqlMigrationByClass(M001_JedisRemoveJobStatsAndUseMetadata.class))).isTrue();
 
         assertThatCode(lettuceRedisDBCreator::runMigrations).doesNotThrowAnyException();

@@ -15,7 +15,7 @@ class CronTest {
 
     @ParameterizedTest
     @MethodSource("getCronExpressionsAndTheirValue")
-    void testCron(String cronExpression, String expectedResult) {
+    void cron(String cronExpression, String expectedResult) {
         assertThat(cronExpression).isEqualTo(expectedResult);
     }
 

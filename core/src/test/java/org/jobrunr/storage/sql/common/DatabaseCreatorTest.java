@@ -27,7 +27,12 @@ import java.util.stream.Stream;
 import static java.util.Comparator.comparing;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 class DatabaseCreatorTest {
 
@@ -50,19 +55,19 @@ class DatabaseCreatorTest {
     }
 
     @Test
-    void testSqlLiteMigrationsUsingMainMethod() {
+    void sqlLiteMigrationsUsingMainMethod() {
         assertThatCode(() -> DatabaseCreator.main(new String[]{"jdbc:sqlite:" + SQLITE_DB1, "", ""})).doesNotThrowAnyException();
     }
 
     @Test
-    void testSqlLiteMigrations() {
+    void sqlLiteMigrations() {
         final DatabaseCreator databaseCreator = new DatabaseCreator(createDataSource("jdbc:sqlite:" + SQLITE_DB1));
         assertThatCode(databaseCreator::runMigrations).doesNotThrowAnyException();
         assertThatCode(databaseCreator::validateTables).doesNotThrowAnyException();
     }
 
     @Test
-    void testSqlLiteMigrationsAllMigrationsApplied() {
+    void sqlLiteMigrationsAllMigrationsApplied() {
         DefaultSqlMigrationProvider sqlMigrationProvider = new DefaultSqlMigrationProvider();
         List<SqlMigration> migrations = sqlMigrationProvider.getMigrations(DatabaseCreator.class);
 
@@ -75,13 +80,13 @@ class DatabaseCreatorTest {
     }
 
     @Test
-    void testValidateWithoutTables() {
+    void validateWithoutTables() {
         final DatabaseCreator databaseCreator = new DatabaseCreator(createDataSource("jdbc:sqlite:" + SQLITE_DB2));
         assertThatThrownBy(databaseCreator::validateTables).isInstanceOf(JobRunrException.class);
     }
 
     @Test
-    void testH2MigrationsWithSchema() {
+    void h2MigrationsWithSchema() {
         final JdbcDataSource dataSource = createH2DataSource("jdbc:h2:/tmp/test;INIT=CREATE SCHEMA IF NOT EXISTS the_schema");
         final DatabaseCreator databaseCreator = new DatabaseCreator(dataSource, "the_schema.prefix_", H2StorageProvider.class);
         assertThatCode(databaseCreator::runMigrations).doesNotThrowAnyException();
@@ -89,7 +94,7 @@ class DatabaseCreatorTest {
     }
 
     @Test
-    void testH2ValidateWithTablesInWrongSchema() {
+    void h2ValidateWithTablesInWrongSchema() {
         final JdbcDataSource dataSource = createH2DataSource("jdbc:h2:/tmp/test;INIT=CREATE SCHEMA IF NOT EXISTS schema1\\;CREATE SCHEMA IF NOT EXISTS schema2");
         final DatabaseCreator databaseCreatorForSchema1 = new DatabaseCreator(dataSource, "schema1.prefix_", H2StorageProvider.class);
         databaseCreatorForSchema1.runMigrations();
@@ -98,7 +103,7 @@ class DatabaseCreatorTest {
     }
 
     @Test
-    void testMigrationIsNotDoneMoreThanOnce() {
+    void migrationIsNotDoneMoreThanOnce() {
         final JdbcDataSource dataSource = createH2DataSource("jdbc:h2:mem:/test;DB_CLOSE_DELAY=-1");
         final DatabaseCreator databaseCreator = Mockito.spy(new DatabaseCreator(dataSource, H2StorageProvider.class));
 

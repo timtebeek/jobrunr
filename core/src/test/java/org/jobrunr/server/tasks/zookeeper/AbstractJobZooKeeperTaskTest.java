@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-public class AbstractJobZooKeeperTaskTest extends AbstractTaskTest {
+class AbstractJobZooKeeperTaskTest extends AbstractTaskTest {
 
     AbstractJobZooKeeperTask task;
 

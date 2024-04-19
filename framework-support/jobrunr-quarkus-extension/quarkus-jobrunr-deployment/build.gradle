@@ -43,6 +43,7 @@ normalization {
 test {
     systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
     systemProperty "platform.quarkus.native.builder-image", false
+    useJUnitPlatform()
 }
 
 jar {

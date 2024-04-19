@@ -62,7 +62,7 @@ class RecurringJobTest {
     }
 
     @Test
-    void testToScheduledJobsGetsAllJobsBetweenStartAndEnd() {
+    void toScheduledJobsGetsAllJobsBetweenStartAndEnd() {
         final RecurringJob recurringJob = aDefaultRecurringJob()
                 .withCronExpression("*/5 * * * * *")
                 .build();
@@ -75,7 +75,7 @@ class RecurringJobTest {
     }
 
     @Test
-    void testToScheduledJobsGetsAllJobsBetweenStartAndEndNoResults() {
+    void toScheduledJobsGetsAllJobsBetweenStartAndEndNoResults() {
         final RecurringJob recurringJob = aDefaultRecurringJob()
                 .withCronExpression(Cron.weekly())
                 .build();
@@ -86,7 +86,7 @@ class RecurringJobTest {
     }
 
     @Test
-    void testToScheduledJobsGetsAllJobsBetweenStartAndEndMultipleResults() {
+    void toScheduledJobsGetsAllJobsBetweenStartAndEndMultipleResults() {
         final RecurringJob recurringJob = aDefaultRecurringJob()
                 .withCronExpression("*/5 * * * * *")
                 .build();
@@ -97,7 +97,7 @@ class RecurringJobTest {
     }
 
     @Test
-    void testToScheduledJob() {
+    void toScheduledJob() {
         final RecurringJob recurringJob = aDefaultRecurringJob()
                 .withId("the-recurring-job")
                 .withName("the recurring job")
@@ -112,7 +112,7 @@ class RecurringJobTest {
     }
 
     @Test
-    void testToEnqueuedJob() {
+    void toEnqueuedJob() {
         final RecurringJob recurringJob = aDefaultRecurringJob()
                 .withId("the-recurring-job")
                 .withName("the recurring job")
@@ -159,7 +159,7 @@ class RecurringJobTest {
     }
 
     @Test
-    void testDurationBetweenRecurringJobInstancesForCronJob() {
+    void durationBetweenRecurringJobInstancesForCronJob() {
         RecurringJob recurringJob1 = aDefaultRecurringJob().withCronExpression("* * * * * *").build();
         assertThat(recurringJob1.durationBetweenRecurringJobInstances()).isEqualTo(ofSeconds(1));
 
@@ -168,7 +168,7 @@ class RecurringJobTest {
     }
 
     @Test
-    void testDurationBetweenRecurringJobInstancesForIntervalJob() {
+    void durationBetweenRecurringJobInstancesForIntervalJob() {
         RecurringJob recurringJob1 = aDefaultRecurringJob().withIntervalExpression(ofMillis(200).toString()).build();
         assertThat(recurringJob1.durationBetweenRecurringJobInstances()).isEqualTo(ofMillis(200));
 
