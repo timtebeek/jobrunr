@@ -45,7 +45,7 @@ public abstract class JobHandler implements Runnable {
                 }
                 backgroundJobServer.stop();
             } else {
-                LOGGER.warn(JobRunrException.SHOULD_NOT_HAPPEN_MESSAGE + " - Processing will continue.", e);
+                LOGGER.warn("{} - Processing will continue.", JobRunrException.SHOULD_NOT_HAPPEN_MESSAGE, e);
             }
         }
     }

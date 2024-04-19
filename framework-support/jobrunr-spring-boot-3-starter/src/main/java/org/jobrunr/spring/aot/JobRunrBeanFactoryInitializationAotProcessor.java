@@ -212,7 +212,7 @@ public class JobRunrBeanFactoryInitializationAotProcessor implements BeanFactory
     private static void registerAllAssignableTypesOf(RuntimeHints runtimeHints, Class<?> anyClass) {
         Set<String> candidateClassNamesToRegister = findAllAssignableClassesOf(anyClass);
         runtimeHints.reflection().registerType(anyClass, allMemberCategories);
-        LOGGER.debug("Register JobRunr class for reflection SUCCEEDED: class " + anyClass.getName() + " available for reflection in Spring Boot Native.");
+        LOGGER.debug("Register JobRunr class for reflection SUCCEEDED: class {} available for reflection in Spring Boot Native.", anyClass.getName());
         for (String candidateClassNameToRegister : candidateClassNamesToRegister) {
             registerHintByClassName(runtimeHints, candidateClassNameToRegister);
         }
@@ -254,10 +254,10 @@ public class JobRunrBeanFactoryInitializationAotProcessor implements BeanFactory
         try {
             Class clazz = toClass(className);
             runtimeHints.reflection().registerType(clazz, allMemberCategories);
-            LOGGER.debug("Register JobRunr class for reflection SUCCEEDED: class " + className + " available for reflection in Spring Boot Native.");
+            LOGGER.debug("Register JobRunr class for reflection SUCCEEDED: class {} available for reflection in Spring Boot Native.", className);
             return true;
         } catch (NoClassDefFoundError e) {
-            LOGGER.debug("Register JobRunr class for reflection FAILED: Could not load class " + className + " as class dependencies (imports) are not available.");
+            LOGGER.debug("Register JobRunr class for reflection FAILED: Could not load class {} as class dependencies (imports) are not available.", className);
             return false;
         }
     }

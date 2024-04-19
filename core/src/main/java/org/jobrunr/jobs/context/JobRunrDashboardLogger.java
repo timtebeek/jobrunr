@@ -73,7 +73,7 @@ public class JobRunrDashboardLogger implements Logger {
 
     @Override
     public void trace(Marker marker, String msg) {
-        logger.trace(marker, msg);
+        logger.trace("{}", marker, msg);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class JobRunrDashboardLogger implements Logger {
 
     @Override
     public void debug(Marker marker, String msg) {
-        logger.debug(marker, msg);
+        logger.debug("{}", marker, msg);
     }
 
     @Override
@@ -198,7 +198,7 @@ public class JobRunrDashboardLogger implements Logger {
 
     @Override
     public void info(Marker marker, String msg) {
-        logger.info(marker, msg);
+        logger.info("{}", marker, msg);
         logInfoToJobDashboard(msg);
     }
 
@@ -268,7 +268,7 @@ public class JobRunrDashboardLogger implements Logger {
 
     @Override
     public void warn(Marker marker, String msg) {
-        logger.warn(marker, msg);
+        logger.warn("{}", marker, msg);
         logWarnToJobDashboard(msg);
     }
 
@@ -338,7 +338,7 @@ public class JobRunrDashboardLogger implements Logger {
 
     @Override
     public void error(Marker marker, String msg) {
-        logger.error(marker, msg);
+        logger.error("{}", marker, msg);
         logErrorToJobDashboard(msg);
     }
 

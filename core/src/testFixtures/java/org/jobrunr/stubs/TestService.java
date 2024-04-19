@@ -54,20 +54,20 @@ public class TestService implements TestServiceInterface {
     }
 
     public void doWorkWithFile(File file) throws Exception {
-        LOGGER.debug("Doing some work... " + file.getAbsolutePath());
+        LOGGER.debug("Doing some work... {}", file.getAbsolutePath());
     }
 
     public void doWorkWithPath(Path path) throws Exception {
-        LOGGER.debug("Doing some work... " + path.toFile().getAbsolutePath());
+        LOGGER.debug("Doing some work... {}", path.toFile().getAbsolutePath());
     }
 
     public void doWork(Work work) throws Exception {
         processedJobs += work.workCount;
-        LOGGER.debug("Doing some work... " + work.workCount + "; " + work.someString);
+        LOGGER.debug("Doing some work... {}; {}", work.workCount, work.someString);
     }
 
     public void doWork(Double count) {
-        LOGGER.debug("Doing some work... " + processedJobs + count);
+        LOGGER.debug("Doing some work... {}{}", processedJobs, count);
     }
 
     public void doWork(double[] xValues, double[] yValues) {
@@ -76,94 +76,94 @@ public class TestService implements TestServiceInterface {
 
     public void doWork(Integer count) {
         processedJobs += count;
-        LOGGER.debug("Doing some work... " + processedJobs + "; " + now());
+        LOGGER.debug("Doing some work... {}; {}", processedJobs, now());
     }
 
     public void doWork(Long count) {
         processedJobs += count;
-        LOGGER.debug("Doing some work... " + processedJobs);
+        LOGGER.debug("Doing some work... {}", processedJobs);
     }
 
     public void doWork(Integer count, JobContext jobContext) throws InterruptedException {
         processedJobs += count;
-        LOGGER.debug("Doing some work... " + processedJobs + "; jobId: " + jobContext.getJobId());
+        LOGGER.debug("Doing some work... {}; jobId: {}", processedJobs, jobContext.getJobId());
         jobContext.saveMetadata("test", "test");
         Thread.sleep(600L);
     }
 
     public void doWork(int countA, int countB) {
         processedJobs += (countA + countB);
-        LOGGER.debug("Doing some work... " + processedJobs);
+        LOGGER.debug("Doing some work... {}", processedJobs);
     }
 
     @Job(name = "Doing some hard work for user %1 (customerId: %X{customer.id})")
     public void doWorkWithAnnotation(Integer userId, String userName) {
-        LOGGER.debug("Doing some work... " + processedJobs);
+        LOGGER.debug("Doing some work... {}", processedJobs);
     }
 
     @Job(name = "Doing some hard work for user %1 with id %0")
     public void doWorkWithAnnotationAndJobContext(Integer userId, String userName, JobContext jobContext) {
-        LOGGER.debug("Doing some work... " + processedJobs);
+        LOGGER.debug("Doing some work... {}", processedJobs);
     }
 
     public void doWork(int count, String aString, Instant instant) {
         processedJobs += count;
-        LOGGER.debug("Doing some work... " + processedJobs + " " + aString + " " + instant);
+        LOGGER.debug("Doing some work... {} {} {}", processedJobs, aString, instant);
     }
 
     public void doWork(UUID uuid) {
-        LOGGER.debug("Doing some work... " + uuid);
+        LOGGER.debug("Doing some work... {}", uuid);
     }
 
     public void doWorkWithUUID(UUID uuid) {
-        LOGGER.debug("Doing some work... " + uuid);
+        LOGGER.debug("Doing some work... {}", uuid);
     }
 
     public void doWorkWithLong(Long value) {
-        LOGGER.debug("Doing some work... " + value);
+        LOGGER.debug("Doing some work... {}", value);
     }
 
     public void doWork(UUID uuid, int count, Instant instant) {
         processedJobs += count;
-        LOGGER.debug("Doing some work... " + processedJobs + " " + uuid + " " + instant);
+        LOGGER.debug("Doing some work... {} {} {}", processedJobs, uuid, instant);
     }
 
     public void doWork(String aString, int count, Instant instant) {
         processedJobs += count;
-        LOGGER.debug("Doing some work... " + processedJobs + " " + aString + " " + instant);
+        LOGGER.debug("Doing some work... {} {} {}", processedJobs, aString, instant);
     }
 
     public void doWork(LocalDateTime localDateTime) {
-        LOGGER.debug("Doing some work... " + processedJobs + " " + localDateTime.toString());
+        LOGGER.debug("Doing some work... {} {}", processedJobs, localDateTime.toString());
     }
 
     public void doWork(boolean bool, int i, long l, float f, double d) {
-        LOGGER.debug("Doing some work... " + bool + "; " + i + "; " + l + "; " + f + "; " + d);
+        LOGGER.debug("Doing some work... {}; {}; {}; {}; {}", bool, i, l, f, d);
     }
 
     public void doWork(byte b, short s, char c) {
-        LOGGER.debug("Doing some work... " + b + "; " + s + "; " + c);
+        LOGGER.debug("Doing some work... {}; {}; {}", b, s, c);
     }
 
     public void doWorkWithEnum(Task task) {
-        LOGGER.debug("Doing some work: " + task.executeTask());
+        LOGGER.debug("Doing some work: {}", task.executeTask());
     }
 
     @Job(name = "Doing some work")
     public void doWork() {
         processedJobs++;
-        LOGGER.debug("Doing some work... " + processedJobs);
+        LOGGER.debug("Doing some work... {}", processedJobs);
     }
 
     @Job(name = "Doing some work with input")
     public void doWork(String input) {
-        LOGGER.debug("Doing some work with input " + input);
+        LOGGER.debug("Doing some work with input {}", input);
     }
 
     @Job(labels = "label-%0 - %1")
     public void doWorkWithJobAnnotationAndLabels(int i, String s) {
         processedJobs++;
-        LOGGER.debug("Doing some work... " + processedJobs);
+        LOGGER.debug("Doing some work... {}", processedJobs);
     }
 
     @Job(jobFilters = {TheSunIsAlwaysShiningElectStateFilter.class, TestFilter.class})
@@ -183,7 +183,7 @@ public class TestService implements TestServiceInterface {
     @Job(name = "Doing some work", retries = 1, labels = {"Just a label", "Another label"})
     public void doWorkThatFails() {
         processedJobs++;
-        LOGGER.debug("Whoopsie, an error will occur " + processedJobs);
+        LOGGER.debug("Whoopsie, an error will occur {}", processedJobs);
         throw new RuntimeException("Whoopsie, an error occurred");
     }
 
@@ -238,7 +238,7 @@ public class TestService implements TestServiceInterface {
         while (start.plusSeconds(seconds).isAfter(now())) {
             if (Thread.currentThread().isInterrupted()) throw new InterruptedException();
             if (Duration.between(start, now()).getSeconds() > initialNbr) {
-                LOGGER.debug("WORK IS BEING DONE: " + Duration.between(start, now()).getSeconds());
+                LOGGER.debug("WORK IS BEING DONE: {}", Duration.between(start, now()).getSeconds());
                 initialNbr = Duration.between(start, now()).getSeconds();
             }
         }
@@ -278,7 +278,7 @@ public class TestService implements TestServiceInterface {
     }
 
     public void doIllegalWork(IllegalWork illegalWork) {
-        LOGGER.debug("Doing some illegal work:" + illegalWork);
+        LOGGER.debug("Doing some illegal work:{}", illegalWork);
     }
 
     public void doWorkWithoutParameters() {
@@ -298,33 +298,33 @@ public class TestService implements TestServiceInterface {
     }
 
     public void jobRunBatchWrappers(Long id, Long env, String param, String currentLogin) {
-        LOGGER.debug("Do work:" + id + "; " + env + "; " + param + "; " + currentLogin);
+        LOGGER.debug("Do work:{}; {}; {}; {}", id, env, param, currentLogin);
     }
 
     public void jobRunBatchPrimitives(long id, long env, String param, String currentLogin) {
-        LOGGER.debug("Do work:" + id + "; " + env + "; " + param + "; " + currentLogin);
+        LOGGER.debug("Do work:{}; {}; {}; {}", id, env, param, currentLogin);
     }
 
     public static void doWorkInStaticMethod(UUID id) {
-        LOGGER.debug("Doing work in static method:" + id);
+        LOGGER.debug("Doing work in static method:{}", id);
     }
 
     public void doWorkWithCollection(Set<Long> singleton) {
-        LOGGER.debug("Doing work with collections: " + singleton.size());
+        LOGGER.debug("Doing work with collections: {}", singleton.size());
     }
 
     public void doWorkWithMDC(String key) {
         assertThat(MDC.get(key)).isNotNull();
         String result = key + ": " + MDC.get(key) + "; ";
-        LOGGER.debug("Found following MDC keys: " + result);
+        LOGGER.debug("Found following MDC keys: {}", result);
     }
 
     public void doWorkWithPrimitiveInt(int intValue) {
-        LOGGER.debug("Doing some work with a primitive int: " + intValue);
+        LOGGER.debug("Doing some work with a primitive int: {}", intValue);
     }
 
     public void doWorkForIssue645(Long id, GithubIssue645 someObject) {
-        LOGGER.debug("Doing work for github issue 645 " + id.toString() + "; " + someObject);
+        LOGGER.debug("Doing work for github issue 645 {}; {}", id.toString(), someObject);
     }
 
     public static class Work {
@@ -470,7 +470,7 @@ public class TestService implements TestServiceInterface {
 
         @Override
         public Void doWork() {
-            LOGGER.debug("Simple Command " + string + " " + integer);
+            LOGGER.debug("Simple Command {} {}", string, integer);
             return null;
         }
     }
@@ -478,7 +478,7 @@ public class TestService implements TestServiceInterface {
     public static class GithubIssue335 {
 
         public void run(UUID id) {
-            LOGGER.debug("Running job for issue 335 " + id);
+            LOGGER.debug("Running job for issue 335 {}", id);
         }
 
     }
