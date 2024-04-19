@@ -27,7 +27,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class CronExpressionTest {
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static final Instant createdAtNotRelevantInstant = Instant.ofEpochSecond(0);
+    private static final Instant createdAtNotRelevantInstant = Instant.EPOCH;
 
     @ParameterizedTest
     @MethodSource("startInstantCronExpressionAndResultInstant")

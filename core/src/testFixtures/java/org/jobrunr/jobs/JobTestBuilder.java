@@ -18,7 +18,6 @@ import org.mockito.internal.util.reflection.Whitebox;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -125,7 +124,7 @@ public class JobTestBuilder {
                 .withName("a succeeded job")
                 .withJobDetails(systemOutPrintLnJobDetails("a test"))
                 .withState(new ProcessingState(UUID.randomUUID(), DEFAULT_SERVER_NAME))
-                .withState(new SucceededState(Duration.of(230, ChronoUnit.SECONDS), Duration.ofSeconds(10L, 7345L)));
+                .withState(new SucceededState(Duration.ofSeconds(230), Duration.ofSeconds(10L, 7345L)));
     }
 
     public static JobTestBuilder aDeletedJob() {
@@ -150,7 +149,7 @@ public class JobTestBuilder {
                 jobTestBuilder.withState(new ScheduledState(now().minusSeconds((10 - i) * 60 * 60), "Retry attempt " + (i + 1) + " of " + 10));
             }
         }
-        jobTestBuilder.withState(new SucceededState(Duration.of(230, ChronoUnit.SECONDS), Duration.of(10, ChronoUnit.SECONDS)));
+        jobTestBuilder.withState(new SucceededState(Duration.ofSeconds(230), Duration.ofSeconds(10)));
 
         return jobTestBuilder;
     }

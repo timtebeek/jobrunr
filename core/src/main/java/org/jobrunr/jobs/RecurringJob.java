@@ -45,7 +45,7 @@ public class RecurringJob extends AbstractJob {
     }
 
     public RecurringJob(String id, JobDetails jobDetails, Schedule schedule, ZoneId zoneId) {
-        this(id, jobDetails, schedule, zoneId, Instant.now(Clock.system(zoneId)));
+        this(id, jobDetails, schedule, zoneId, Clock.system(zoneId).instant());
     }
 
     public RecurringJob(String id, JobDetails jobDetails, String scheduleExpression, String zoneId, String createdAt) {
